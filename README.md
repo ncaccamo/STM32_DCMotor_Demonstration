@@ -10,11 +10,11 @@ Main objectives:
 5. Show the motor speed on a small display. Utilize third party API to drive the display.
 
 
-Components:
-STM32 Nucleo-G431RB development board
-KY-040 rotary encoder
-12V DC Motor with encoder (https://www.amazon.com/gp/product/B07GNFYGYQ/ref=ppx_yo_dt_b_asin_title_o00_s00?ie=UTF8&psc=1)
-L298N Motor Driver Controller Board and 12V DC power supply
+Components:\
+STM32 Nucleo-G431RB development board\
+KY-040 rotary encoder\
+12V DC Motor with encoder (https://www.amazon.com/gp/product/B07GNFYGYQ/ref=ppx_yo_dt_b_asin_title_o00_s00?ie=UTF8&psc=1) \
+L298N Motor Driver Controller Board and 12V DC power supply\
 SPI OLED Display, 128x64 resolution
 
 
