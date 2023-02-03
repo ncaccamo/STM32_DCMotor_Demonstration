@@ -1,0 +1,7 @@
+"./Src/clockconfig.o"
+"./Src/gpio.o"
+"./Src/main.o"
+"./Src/syscalls.o"
+"./Src/sysmem.o"
+"./Src/system_stm32g4xx.o"
+"./Startup/startup_stm32g431rbtx.o"
