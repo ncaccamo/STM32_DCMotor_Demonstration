@@ -30,6 +30,10 @@ int main(void)
 {
 	sysClockConfig();
 	gpioInit();
+
+	while(1){
+
+	}
 }
 
 
