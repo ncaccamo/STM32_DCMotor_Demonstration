@@ -1,6 +1,6 @@
 # STM32_DCMotor_Demonstration
 
-This project is practice and demonstrate embedded software skills on a modern ARM microcontroller.
+This project is to practice and demonstrate embedded software skills on a modern ARM microcontroller.
 
 Main objectives:
 1. Start a blank project and configure the microcontroller through registers utilizing basic drivers and headers provided by the manufacturer.
