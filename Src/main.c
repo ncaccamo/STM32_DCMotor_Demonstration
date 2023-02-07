@@ -16,10 +16,14 @@
  ******************************************************************************
  */
 
-#include <main.h>
+#include <stdio.h>
 #include <stdint.h>
+#include <main.h>
 #include <clockconfig.h>
 #include <gpio.h>
+#include <interrupt.h>
+#include <encoder.h>
+
 
 
 #if !defined(__SOFT_FP__) && defined(__ARM_FP)
@@ -30,6 +34,8 @@ int main(void)
 {
 	sysClockConfig();
 	gpioInit();
+	interruptInit();
+	printf("Initialization done\n");
 
 	while(1){
 
@@ -38,5 +44,13 @@ int main(void)
 
 
 
+//function to allow printing to console
+int _write(int file, char *ptr, int len)
+{
+  int i=0;
+  for(i=0 ; i<len ; i++)
+    ITM_SendChar((*ptr++));
+  return len;
+}
 
 

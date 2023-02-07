@@ -1,18 +1,18 @@
 /**
  ******************************************************************************
- * @file           : main.h
+ * @file           : gpio.c
  * @author         : Nicholas Caccamo
- * @brief          : Header for main
+ * @brief          : Header for interrupt routine initialization
  ******************************************************************************
  */
 
-#ifndef MAIN_H
-#define MAIN_H
+#ifndef INTERRUPT_H
+#define INTERRUPT_H
 
+#include <stm32g431xx.h>
 
-int _write(int file, char *ptr, int len);
-
-
+//function prototypes
+void interruptInit();
 
 
 

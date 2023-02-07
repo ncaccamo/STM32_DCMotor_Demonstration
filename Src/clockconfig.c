@@ -14,8 +14,7 @@ void sysClockConfig(){
 	FLASH->ACR |= (FLASH_ACR_LATENCY_4WS << FLASH_ACR_LATENCY_Pos);
 
 
-
-	//Enable HSI oscillator and then wait for clock ready flag
+	//enable HSI oscillator and then wait for clock ready flag
 	RCC->CR |= (0x01 << RCC_CR_HSION_Pos);
 	while (!(RCC->CR & (0x01 << RCC_CR_HSIRDY_Pos)));
 
@@ -47,9 +46,13 @@ void sysClockConfig(){
 	RCC->CFGR |= (0x03 << RCC_CFGR_SW_Pos);
 	while (!(RCC->CFGR & (0x03 << RCC_CFGR_SWS_Pos)));
 
-	//enable clock for GPIO ports A, C
+	//enable clock for System Configuration controller
+	RCC->APB2ENR |= (0x01 << RCC_APB2SMENR_SYSCFGSMEN_Pos);
+
+	//enable clock for GPIO ports A, C, F
 	RCC->AHB2ENR |= (0x01 << RCC_AHB2ENR_GPIOAEN_Pos);
 	RCC->AHB2ENR |= (0x01 << RCC_AHB2ENR_GPIOCEN_Pos);
+	RCC->AHB2ENR |= (0x01 << RCC_AHB2ENR_GPIOFEN_Pos);
 
 	//enable clock for SPI1
 	RCC->APB2ENR |= (0x01 << RCC_APB2ENR_SPI1EN_Pos);

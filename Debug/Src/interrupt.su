@@ -1,0 +1,5 @@
+C:/Users/Nicholas/STM32CubeIDE/workspace_1.11.2/STM32_DCMotor_Encoder_Display/Drivers/CMSIS/Include/core_cm4.h:1679:22:__NVIC_EnableIRQ	16	static,ignoring_inline_asm
+C:/Users/Nicholas/STM32CubeIDE/workspace_1.11.2/STM32_DCMotor_Encoder_Display/Drivers/CMSIS/Include/core_cm4.h:1809:22:__NVIC_SetPriority	16	static
+../Src/interrupt.c:22:6:interruptInit	8	static
+../Src/interrupt.c:52:6:EXTI15_10_IRQHander	4	static
+../Src/interrupt.c:57:6:EXTI0_IRQHandler	4	static

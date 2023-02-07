@@ -1,5 +1,7 @@
 "./Src/clockconfig.o"
+"./Src/encoder.o"
 "./Src/gpio.o"
+"./Src/interrupt.o"
 "./Src/main.o"
 "./Src/syscalls.o"
 "./Src/sysmem.o"

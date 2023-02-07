@@ -6,7 +6,9 @@
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
 ../Src/clockconfig.c \
+../Src/encoder.c \
 ../Src/gpio.c \
+../Src/interrupt.c \
 ../Src/main.c \
 ../Src/syscalls.c \
 ../Src/sysmem.c \
@@ -14,7 +16,9 @@ C_SRCS += \
 
 OBJS += \
 ./Src/clockconfig.o \
+./Src/encoder.o \
 ./Src/gpio.o \
+./Src/interrupt.o \
 ./Src/main.o \
 ./Src/syscalls.o \
 ./Src/sysmem.o \
@@ -22,7 +26,9 @@ OBJS += \
 
 C_DEPS += \
 ./Src/clockconfig.d \
+./Src/encoder.d \
 ./Src/gpio.d \
+./Src/interrupt.d \
 ./Src/main.d \
 ./Src/syscalls.d \
 ./Src/sysmem.d \
@@ -36,7 +42,7 @@ Src/%.o Src/%.su: ../Src/%.c Src/subdir.mk
 clean: clean-Src
 
 clean-Src:
-	-$(RM) ./Src/clockconfig.d ./Src/clockconfig.o ./Src/clockconfig.su ./Src/gpio.d ./Src/gpio.o ./Src/gpio.su ./Src/main.d ./Src/main.o ./Src/main.su ./Src/syscalls.d ./Src/syscalls.o ./Src/syscalls.su ./Src/sysmem.d ./Src/sysmem.o ./Src/sysmem.su ./Src/system_stm32g4xx.d ./Src/system_stm32g4xx.o ./Src/system_stm32g4xx.su
+	-$(RM) ./Src/clockconfig.d ./Src/clockconfig.o ./Src/clockconfig.su ./Src/encoder.d ./Src/encoder.o ./Src/encoder.su ./Src/gpio.d ./Src/gpio.o ./Src/gpio.su ./Src/interrupt.d ./Src/interrupt.o ./Src/interrupt.su ./Src/main.d ./Src/main.o ./Src/main.su ./Src/syscalls.d ./Src/syscalls.o ./Src/syscalls.su ./Src/sysmem.d ./Src/sysmem.o ./Src/sysmem.su ./Src/system_stm32g4xx.d ./Src/system_stm32g4xx.o ./Src/system_stm32g4xx.su
 
 .PHONY: clean-Src
 

@@ -1,6 +1,6 @@
 # STM32_DCMotor_Demonstration
 
-This project is practice and demonstrate embedded software skills on a modern ARM microcontroller.
+This project is intended to practice and demonstrate embedded software skills on a modern ARM microcontroller.
 
 Main objectives:
 1. Start a blank project and configure the microcontroller through registers utilizing basic drivers and headers provided by the manufacturer.
@@ -20,8 +20,25 @@ SPI OLED Display, 128x64 resolution
 
 Hardware connections:
 
-| Pin Label | Signal | Hardware Interface |
-|-----------|--------|--------------------|
-|           |        |                    |
-|           |        |                    |
-|           |        |                    |
+| Nucleo Board Pin Label | Signal    | Hardware Interface |
+|------------------------|-----------|--------------------|
+| PA4                    | SPI1_NSS  | Display CS         |
+| PA5                    | SPI1_SCK  | Display D0         |
+| PA6                    | Output    | Display DC         |
+| PA7                    | SPI1_MOSI | Display D1         |
+| PC2                    | Input     | Motor Encoder A    |
+| PC3                    | Input     | Motor Encoder B    |
+| PC10                   | Output    | Motor Driver In1   |
+| PC12                   | Output    | Motor Driver In2   |
+| PC13                   | Input     | Rotary Encoder CLK |
+| PC14                   | Input     | Rotary Encoder DT  |
+| PF0                    | Input     | Rotary Encoder SW  |
+
+
+Issues encountered, learnings:
+GPIO clock has to be enabled before the configuration registers can be written.\
+Clearing GPIOA MODER register disabled the JTAG. Learned that JTAG is using some pins on GPIO Port A so those pin configurations were left at reset value.\
+Writing clock registers required that flash latency was set to 4 wait states according to ST example code and the manual.\
+Printing to console did not work so had to add a write function using CMSIS drivers, found someone else's solution online.\
+
+
