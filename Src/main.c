@@ -21,6 +21,7 @@
 #include <main.h>
 #include <clockconfig.h>
 #include <gpio.h>
+#include <timer.h>
 #include <interrupt.h>
 #include <encoder.h>
 
@@ -35,9 +36,14 @@ int main(void)
 	sysClockConfig();
 	gpioInit();
 	interruptInit();
+	TIM4Init();
 	printf("Initialization done\n");
 
+	int8_t count = 0;
+
 	while(1){
+		count = TIM4->CNT;
+		printf("Timer Count: %d\n", count);
 
 	}
 }

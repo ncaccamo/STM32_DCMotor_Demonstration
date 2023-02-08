@@ -12,7 +12,8 @@ C_SRCS += \
 ../Src/main.c \
 ../Src/syscalls.c \
 ../Src/sysmem.c \
-../Src/system_stm32g4xx.c 
+../Src/system_stm32g4xx.c \
+../Src/timer.c 
 
 OBJS += \
 ./Src/clockconfig.o \
@@ -22,7 +23,8 @@ OBJS += \
 ./Src/main.o \
 ./Src/syscalls.o \
 ./Src/sysmem.o \
-./Src/system_stm32g4xx.o 
+./Src/system_stm32g4xx.o \
+./Src/timer.o 
 
 C_DEPS += \
 ./Src/clockconfig.d \
@@ -32,7 +34,8 @@ C_DEPS += \
 ./Src/main.d \
 ./Src/syscalls.d \
 ./Src/sysmem.d \
-./Src/system_stm32g4xx.d 
+./Src/system_stm32g4xx.d \
+./Src/timer.d 
 
 
 # Each subdirectory must supply rules for building sources it contributes
@@ -42,7 +45,7 @@ Src/%.o Src/%.su: ../Src/%.c Src/subdir.mk
 clean: clean-Src
 
 clean-Src:
-	-$(RM) ./Src/clockconfig.d ./Src/clockconfig.o ./Src/clockconfig.su ./Src/encoder.d ./Src/encoder.o ./Src/encoder.su ./Src/gpio.d ./Src/gpio.o ./Src/gpio.su ./Src/interrupt.d ./Src/interrupt.o ./Src/interrupt.su ./Src/main.d ./Src/main.o ./Src/main.su ./Src/syscalls.d ./Src/syscalls.o ./Src/syscalls.su ./Src/sysmem.d ./Src/sysmem.o ./Src/sysmem.su ./Src/system_stm32g4xx.d ./Src/system_stm32g4xx.o ./Src/system_stm32g4xx.su
+	-$(RM) ./Src/clockconfig.d ./Src/clockconfig.o ./Src/clockconfig.su ./Src/encoder.d ./Src/encoder.o ./Src/encoder.su ./Src/gpio.d ./Src/gpio.o ./Src/gpio.su ./Src/interrupt.d ./Src/interrupt.o ./Src/interrupt.su ./Src/main.d ./Src/main.o ./Src/main.su ./Src/syscalls.d ./Src/syscalls.o ./Src/syscalls.su ./Src/sysmem.d ./Src/sysmem.o ./Src/sysmem.su ./Src/system_stm32g4xx.d ./Src/system_stm32g4xx.o ./Src/system_stm32g4xx.su ./Src/timer.d ./Src/timer.o ./Src/timer.su
 
 .PHONY: clean-Src
 

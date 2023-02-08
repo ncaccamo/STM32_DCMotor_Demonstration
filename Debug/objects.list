@@ -6,4 +6,5 @@
 "./Src/syscalls.o"
 "./Src/sysmem.o"
 "./Src/system_stm32g4xx.o"
+"./Src/timer.o"
 "./Startup/startup_stm32g431rbtx.o"

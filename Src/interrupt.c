@@ -8,6 +8,7 @@
 
 #include <interrupt.h>
 #include <stm32g431xx.h>
+#include <stdio.h>
 
 
 /**
@@ -21,41 +22,49 @@ acknowledged.
 
 void interruptInit(){
 //System Configuration clock enabled in clockconfig.c
-//EXTI13, EXTI Line13 Interrupt, SYSCFG_EXTICR4 - PC13 (Rotary Encoder CLK)
-SYSCFG->EXTICR[3] |= (0x02 << SYSCFG_EXTICR4_EXTI13_Pos);
+//EXTI12, EXTI Line12 Interrupt, SYSCFG_EXTICR4 - PB12 (Rotary Encoder SW)
+SYSCFG->EXTICR[3] |= (0x01 << SYSCFG_EXTICR4_EXTI12_Pos);
 //EXTI0, EXTI Line0 Interrupt, SYSCFG_EXTICR1 - PF0 (Rotary Encoder SW)
-SYSCFG->EXTICR[0] |= (0x05 << SYSCFG_EXTICR1_EXTI0_Pos);
+//SYSCFG->EXTICR[0] |= (0x05 << SYSCFG_EXTICR1_EXTI0_Pos);
 
 //set interrupts to maskable (reset value is 0 anyway)
-EXTI->IMR1 |= (0x00 << EXTI_IMR1_IM13_Pos);
-EXTI->IMR1 |= (0x00 << EXTI_IMR1_IM0_Pos);
+EXTI->IMR1 |= (0x00 << EXTI_IMR1_IM12_Pos);
+//EXTI->IMR1 |= (0x00 << EXTI_IMR1_IM0_Pos);
 
 //set interrupts to trigger on rising edge
-EXTI->RTSR1 |= (0x01 << EXTI_RTSR1_RT13_Pos);
-EXTI->RTSR1 |= (0x01 << EXTI_RTSR1_RT0_Pos);
+EXTI->RTSR1 |= (0x01 << EXTI_RTSR1_RT12_Pos);
+//EXTI->RTSR1 |= (0x01 << EXTI_RTSR1_RT0_Pos);
 
 //set interrupts to trigger on falling edge
-EXTI->FTSR1 |= (0x01 << EXTI_FTSR1_FT13_Pos);
-EXTI->FTSR1 |= (0x01 << EXTI_FTSR1_FT0_Pos);
+EXTI->FTSR1 |= (0x01 << EXTI_FTSR1_FT12_Pos);
+//EXTI->FTSR1 |= (0x01 << EXTI_FTSR1_FT0_Pos);
+
+
+NVIC_SetPriority(TIM4_IRQn, 0);
+NVIC_EnableIRQ(TIM4_IRQn);
 
 NVIC_SetPriority(EXTI15_10_IRQn, 0);
 NVIC_EnableIRQ(EXTI15_10_IRQn);
 
-NVIC_SetPriority(EXTI0_IRQn, 1);
-NVIC_EnableIRQ(EXTI0_IRQn);
 
 }
 
+
+
+void TIM4_IRQHandler(void){
+	printf("encoder interrupt");
+
+	TIM4->SR = ~TIM_SR_UIF;		    //timer interrupts cleared by writing zero
+
+}
 
 
 
 void EXTI15_10_IRQHander(void){
+	printf("switch interrupt");
 
+	EXTI->PR1 = EXTI_PR1_PIF12;	    //ext interrupts cleared by writing one
 }
 
-
-void EXTI0_IRQHandler(void){
-
-}
 
 
