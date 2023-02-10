@@ -55,6 +55,7 @@ void sysClockConfig(){
 	RCC->AHB2ENR |= (0x01 << RCC_AHB2ENR_GPIOCEN_Pos);
 
 	//enable clock for TIM4
+	RCC->APB1ENR1 |= (0x01 << RCC_APB1ENR1_PWREN_Pos);
 	RCC->APB1ENR1 |= (0x01 << RCC_APB1ENR1_TIM4EN_Pos);
 
 	//enable clock for SPI1

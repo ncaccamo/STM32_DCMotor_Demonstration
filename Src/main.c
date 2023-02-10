@@ -31,6 +31,12 @@
   #warning "FPU is not initialized, but the project is compiling for an FPU. Please initialize the FPU before use."
 #endif
 
+int32_t count;
+int32_t direction;
+int32_t button;
+
+
+
 int main(void)
 {
 	sysClockConfig();
@@ -39,12 +45,12 @@ int main(void)
 	TIM4Init();
 	printf("Initialization done\n");
 
-	int8_t count = 0;
+
+	printf("Timer Count: %d\n", TIM4->CNT);
 
 	while(1){
-		count = TIM4->CNT;
-		printf("Timer Count: %d\n", count);
-
+		count = encoderRotation();
+		button = readPin(ENC_CLK_PORT, ENC_SW_PIN);
 	}
 }
 

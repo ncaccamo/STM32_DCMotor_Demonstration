@@ -1,21 +1,30 @@
 /**
  ******************************************************************************
- * @file           : gpio.c
+ * @file           : adc.h
  * @author         : Nicholas Caccamo
- * @brief          : Header for interrupt routine initialization
+ * @brief          : ADC configuration header
  ******************************************************************************
  */
 
-#ifndef INTERRUPT_H
-#define INTERRUPT_H
+#ifndef ADC_H
+#define ADC_H
 
-#include <stm32g431xx.h>
 
 //function prototypes
-void interruptInit();
-void EXTI15_10_IRQHander(void);
+void adcInit(void);
 
 
 
 
-#endif
+
+
+
+
+
+
+
+
+
+
+
+#endif //ADC_H
