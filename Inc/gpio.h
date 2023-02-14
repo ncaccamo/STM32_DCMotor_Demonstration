@@ -14,7 +14,7 @@
 
 /************************************************************************************************/
 /*
- * GPIO pin positions in GPIO_x registers, such as GPIO_IDR
+ * GPIO pin positions in GPIO registers, such as GPIO_IDR and GPIO_ODR
  */
 #define GPIO_PIN_0                 ((uint16_t)0x0001)  /* Pin 0 selected    */
 #define GPIO_PIN_1                 ((uint16_t)0x0002)  /* Pin 1 selected    */
@@ -32,7 +32,6 @@
 #define GPIO_PIN_13                ((uint16_t)0x2000)  /* Pin 13 selected   */
 #define GPIO_PIN_14                ((uint16_t)0x4000)  /* Pin 14 selected   */
 #define GPIO_PIN_15                ((uint16_t)0x8000)  /* Pin 15 selected   */
-#define GPIO_PIN_All               ((uint16_t)0xFFFF)  /* All pins selected */
 /************************************************************************************************/
 
 /************************************************************************************************/
@@ -75,8 +74,8 @@
 
 
 //Debugging LED
-//#define DBG_LED_PORT
-//#define DBG_LED_PIN
+#define DBG_LED_PORT			    GPIOB
+#define DBG_LED_PIN					GPIO_PIN_1
 
 /************************************************************************************************/
 
@@ -94,7 +93,7 @@ typedef enum{
 void gpioInit();
 int32_t readPin(GPIO_TypeDef *GPIOx, uint16_t GPIO_PIN_x);
 void setPin(GPIO_TypeDef *GPIOx, uint16_t GPIO_PIN_x, pinState_t pinState);
-
+void togglePin(GPIO_TypeDef *GPIOx, uint16_t GPIO_PIN_x);
 
 
 #endif

@@ -13,7 +13,7 @@
 
 //function prototypes
 void interruptInit();
-void EXTI15_10_IRQHander(void);
+
 
 
 

@@ -18,9 +18,6 @@ void sysClockConfig(){
 	RCC->CR |= (0x01 << RCC_CR_HSION_Pos);
 	while (!(RCC->CR & (0x01 << RCC_CR_HSIRDY_Pos)));
 
-	//RCC->APB1ENR1 |= (0x01 << RCC_APB1ENR1_PWREN_Pos);
-
-
 	//set AHB, APB2, APB1 prescalar
 	RCC->CFGR |= (0x00 << RCC_CFGR_HPRE_Pos);   //AHB prescalar no division
 	RCC->CFGR |= (0x00 << RCC_CFGR_PPRE2_Pos);  //APB2 prescalar no division
@@ -54,9 +51,10 @@ void sysClockConfig(){
 	RCC->AHB2ENR |= (0x01 << RCC_AHB2ENR_GPIOBEN_Pos);
 	RCC->AHB2ENR |= (0x01 << RCC_AHB2ENR_GPIOCEN_Pos);
 
-	//enable clock for TIM4
-	RCC->APB1ENR1 |= (0x01 << RCC_APB1ENR1_PWREN_Pos);
+	//enable clock for TIM3, TIM4, TIM8
+	RCC->APB1ENR1 |= (0x01 << RCC_APB1ENR1_TIM3EN_Pos);
 	RCC->APB1ENR1 |= (0x01 << RCC_APB1ENR1_TIM4EN_Pos);
+	RCC->APB2ENR |= (0x01 << RCC_APB2ENR_TIM8EN_Pos);
 
 	//enable clock for SPI1
 	RCC->APB2ENR |= (0x01 << RCC_APB2ENR_SPI1EN_Pos);

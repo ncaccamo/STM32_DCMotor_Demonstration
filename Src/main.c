@@ -31,9 +31,9 @@
   #warning "FPU is not initialized, but the project is compiling for an FPU. Please initialize the FPU before use."
 #endif
 
-int32_t count;
-int32_t direction;
-int32_t button;
+int32_t encoderCount;
+int32_t encoderDirection;
+int32_t encoderButtonState;
 
 
 
@@ -42,17 +42,17 @@ int main(void)
 	sysClockConfig();
 	gpioInit();
 	interruptInit();
+	TIM3Init();
 	TIM4Init();
-	printf("Initialization done\n");
+	//TIM8Init();
+	printf("Initialization done.\n");
 
-
-	printf("Timer Count: %d\n", TIM4->CNT);
 
 	while(1){
-		count = encoderRotation();
-		button = readPin(ENC_CLK_PORT, ENC_SW_PIN);
+
 	}
 }
+
 
 
 

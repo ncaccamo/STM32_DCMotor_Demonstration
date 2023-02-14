@@ -9,14 +9,19 @@
 #include <gpio.h>
 #include <stm32g431xx.h>
 
+/**
+ * Function to set the GPIO registers.
+ * Parameters: none
+ * Returns: none
+ */
 
 void gpioInit(){
 	//clock for GPIO enabled in clockconfig.c
 
 	//clear MODER registers, but leave JTAG pins in reset state
-	//GPIOA->MODER = 0xABFFFFFF;
-	//GPIOB->MODER = 0xFFFFFEBF;
-	//GPIOC->MODER = 0xFFFFFFFF;
+	GPIOA->MODER &= ~(0x00FFFFFF);
+	GPIOB->MODER &= ~(0xFFFFF00F);
+	GPIOC->MODER &= ~(0xFFFFFFFF);
 
 
 
@@ -70,21 +75,26 @@ void gpioInit(){
 
 
 
-	//set PA5? as output for LED debugging
-	//GPIOA->MODER |= (0x01 << GPIO_MODER_MODE5_Pos);
-	//GPIOA->OTYPER &= ~(0x01 << GPIO_MODER_MODE5_Pos);
+	//set PB1 as output for LED debugging
+	GPIOB->MODER |= (0x01 << GPIO_MODER_MODE1_Pos);
+	GPIOB->OTYPER &= ~(0x01 << GPIO_MODER_MODE1_Pos);
 }
+/************************************************************************************************/
+
+
+
+
 
 /************************************************************************************************/
 /**
- * Function to read the state of a GPIO pin, adopted from STM32 HAL.
+ * Function to read the state of an input GPIO pin, adopted from STM32 HAL.
  * Parameters: GPIOx is the GPIO port, where x can be A..E.
- * 			   GPIO_PIN_x is the GPIO pin number, where x can be 0...15.
+ * 			   GPIO_PIN_x is the GPIO pin number, where x can be 0...15. This is the pin's position in the register.
  * Returns: PIN_LOW or PIN_HIGH for state of pin.
  */
 
 int32_t readPin(GPIO_TypeDef *GPIOx, uint16_t GPIO_PIN_x){
-	if ((GPIOx->IDR & GPIO_PIN_x) != 0) {
+	if ((GPIOx->IDR & GPIO_PIN_x) != PIN_LOW) {
 		return PIN_HIGH;
 	}
 	else {
@@ -97,18 +107,39 @@ int32_t readPin(GPIO_TypeDef *GPIOx, uint16_t GPIO_PIN_x){
 
 /************************************************************************************************/
 /**
- * Function to set the state of a GPIO pin using the bit set/reset register (BSRR).
+ * Function to set the state of an output GPIO pin using the bit set/reset register (BSRR).
  * Parameters: GPIOx is the GPIO port, where x can be A..E.
- * 			   GPIO_PIN_x is the GPIO pin number, where x can be 0...15.
- *             pinState can be PIN_HIGH or PIN_LOW.
+ * 			   GPIO_PIN_x is the GPIO pin number, where x can be 0...15. This is the pin's position in the register.
+ *             pinState is the desired pin setting and can be PIN_HIGH or PIN_LOW.
+ * Returns: none
  */
 
 void setPin(GPIO_TypeDef *GPIOx, uint16_t GPIO_PIN_x, pinState_t pinState){
 	if (pinState == PIN_LOW){
-	GPIOx->BSRR |= (0x01 << (GPIO_PIN_x + 16U));
+	GPIOx->BSRR = (GPIO_PIN_x << 16U);          //set pin LOW
 	}
 	else if (pinState == PIN_HIGH){
-	GPIOx->BSRR |= (0x01 << GPIO_PIN_x);
+	GPIOx->BSRR = GPIO_PIN_x;                  //set pin HIGH
+	}
+}
+/************************************************************************************************/
+
+/************************************************************************************************/
+/**
+ * Function to toggle the state of an output GPIO pin using the bit set/reset register (BSRR).
+ * Parameters: GPIOx is the GPIO port, where x can be A..E.
+ * 			   GPIO_PIN_x is the GPIO pin number, where x can be 0...15. This is the pin's position in the register.
+ *             pinState is the desired pin setting and can be PIN_HIGH or PIN_LOW.
+ * Returns: none
+ */
+
+void togglePin(GPIO_TypeDef *GPIOx, uint16_t GPIO_PIN_x){
+
+	if ((GPIOx->ODR & GPIO_PIN_x) != PIN_LOW) {
+		GPIOx->BSRR = (GPIO_PIN_x << 16U);    //set pin LOW
+	}
+	else {
+		GPIOx->BSRR = GPIO_PIN_x;            //set pin HIGH
 	}
 }
 /************************************************************************************************/

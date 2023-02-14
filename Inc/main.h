@@ -10,6 +10,11 @@
 #define MAIN_H
 
 
+extern int32_t encoderCount;
+extern int32_t encoderDirection;
+extern int32_t encoderButtonState;
+
+
 int _write(int file, char *ptr, int len);
 
 

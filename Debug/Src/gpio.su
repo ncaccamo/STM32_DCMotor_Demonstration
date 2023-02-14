@@ -1,2 +1,4 @@
-../Src/gpio.c:13:6:gpioInit	4	static
-../Src/gpio.c:81:9:readPin	16	static
+../Src/gpio.c:18:6:gpioInit	4	static
+../Src/gpio.c:96:9:readPin	16	static
+../Src/gpio.c:117:6:setPin	16	static
+../Src/gpio.c:136:6:togglePin	16	static
