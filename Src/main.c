@@ -24,6 +24,7 @@
 #include <timer.h>
 #include <interrupt.h>
 #include <encoder.h>
+#include <motor.h>
 
 
 
@@ -44,9 +45,9 @@ int main(void)
 	interruptInit();
 	TIM3Init();
 	TIM4Init();
-	//TIM8Init();
+	TIM8Init();
+	setMotorDirection(MOTOR_FORWARD);
 	printf("Initialization done.\n");
-
 
 	while(1){
 

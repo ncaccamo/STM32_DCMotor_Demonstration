@@ -2,4 +2,4 @@ C:/Users/Nicholas/STM32CubeIDE/workspace_1.11.2/STM32_DCMotor_Encoder_Display/Dr
 C:/Users/Nicholas/STM32CubeIDE/workspace_1.11.2/STM32_DCMotor_Encoder_Display/Drivers/CMSIS/Include/core_cm4.h:1809:22:__NVIC_SetPriority	16	static
 ../Src/interrupt.c:24:6:interruptInit	8	static
 ../Src/interrupt.c:49:6:EXTI15_10_IRQHandler	8	static
-../Src/interrupt.c:67:6:TIM3_IRQHandler	8	static
+../Src/interrupt.c:69:6:TIM3_IRQHandler	8	static

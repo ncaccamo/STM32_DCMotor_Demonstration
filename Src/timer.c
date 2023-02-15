@@ -20,7 +20,7 @@ void TIM3Init(){
 	//clock enabled in clockconfig.c
 	TIM3->CR1 |= (0x01 << TIM_CR1_URS_Pos);		//interrupts only occur on update (overflow/underflow)
 	TIM3->DIER |= (0x01 << TIM_DIER_UIE_Pos);	//interrupt is enabled
-	TIM3->PSC = 518; 							//prescalar value (set to yield interrupt every 200ms)
+	TIM3->PSC = 85-1; 						    //prescalar value (set to yield interrupt at 30 Hz)
 	TIM3->CR1 |= (0x01 << TIM_CR1_CEN_Pos);		//counter is enabled
 
 
@@ -62,33 +62,18 @@ void TIM4Init(){
  */
 void TIM8Init(){
 	//clock enabled in clockconfig.c
-	TIM8->CCMR1 |= (0x06 << TIM_CCMR1_OC1M_Pos);		//set PWM mode 1   //check manual for register bits
-
-					/**
-					 * The PWM mode can be selected independently on each channel (one PWM per tim_ocx
-					output) by writing ‘0110’ (PWM mode 1) or ‘0111’ (PWM mode 2) in the OCxM bits in the
-					TIMx_CCMRx register. The corresponding preload register must be enabled by setting the
-					OCxPE bit in the TIMx_CCMRx register, and eventually the auto-reload preload register (in
-					upcounting or center-aligned modes) by setting the ARPE bit in the TIMx_CR1 register.
-					As the preload registers are transferred to the shadow registers only when an update event
-					occurs, before starting the counter, all registers must be initialized by setting the UG bit in
-					the TIMx_EGR register.
-					tim_ocx polarity is software programmable using the CCxP bit in the TIMx_CCER register. It
-					can be programmed as active high or active low. tim_ocx output is enabled by a
-					combination of the CCxE, CCxNE, MOE, OSSI and OSSR bits (TIMx_CCER and
-					TIMx_BDTR registers). Refer to the TIMx_CCER register description for more details.
-					In PWM mode (1 or 2), TIMx_CNT and TIMx_CCRx are always compared to determine
-					whether TIMx_CCRx ≤ TIMx_CNT or TIMx_CNT ≤ TIMx_CCRx (depending on the direction
-					of the counter).
-					The timer is able to generate PWM in edge-aligned mode or center-aligned mode
-					depending on the CMS bits in the TIMx_CR1 register.
-					 */
-
-
-//	TIM8->PSC &= ~(0x01 << TIM_PSC_PSC_Pos);	   //prescalar set to 0
-//	TIM8->CR1 |= (0x01 << TIM_CR1_ARPE_Pos);	   //enable auto-reload preload
-//	TIM8->ARR |= (0x00FF << TIM_ARR_ARR_Pos);	   //auto-reload register
-//	TIM8->CR1 |= (0x01 << TIM_CR1_CEN_Pos);        //counter is enabled
+	TIM8->CCMR1 |= (0x06 << TIM_CCMR1_OC1M_Pos);		//set PWM mode 1
+	TIM8->CCMR1 |= (0x01 << TIM_CCMR1_OC1PE_Pos);		//preload register is enabled, for duty cycle
+	TIM8->CR1 |= (0x01 << TIM_CR1_ARPE_Pos);			//auto-reload preload is enabled, for frequency
+	TIM8->CR1 &= ~(0x03 << TIM_CR1_CMS_Pos);			//edge-aligned mode
+	TIM8->CCER &= ~(0x01 << TIM_CCER_CC1P_Pos);			//OC1 active high
+	TIM8->CCER |= (0x01 << TIM_CCER_CC1E_Pos);			//OC1 is output on the output pin
+	TIM8->CCER &= ~(0x01 << TIM_CCER_CC1NE_Pos);		//tim_oc1n signal is not output
+	TIM8->BDTR |= (0x01 << TIM_BDTR_MOE_Pos);			//main output enabled
+	TIM8->ARR = 100-1;									//auto-reload, corresponds with PWM frequency
+	TIM8->PSC = 170-1;	   								//prescalar of 18, so the input clock is 10Mhz
+	TIM8->EGR |= (0x01 << TIM_EGR_UG_Pos);				//initialize shadow registers before counter starts
+	TIM8->CR1 |= (0x01 << TIM_CR1_CEN_Pos);             //counter is enabled
 
 }
 /************************************************************************************************/

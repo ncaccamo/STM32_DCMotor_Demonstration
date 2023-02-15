@@ -10,11 +10,11 @@
 #include <gpio.h>
 #include <stm32g431xx.h>
 
-static int8_t lastStateCLK = 0;
+static int16_t lastStateCLK = 0;
 int8_t currentStateCLK = 0;
 int8_t currentStateDT = 0;
 static int32_t counter = 0;
-int8_t rotationDirection;
+int8_t rotationDirection = 0;
 
 
 /**
@@ -37,11 +37,14 @@ currentStateDT = readPin(ENC_DT_PORT, ENC_DT_PIN);
     }
   }
     else { 							    		    //both pins are at same state, so encoder has stopped moving
-    if (currentStateCLK != lastStateCLK) {
-      counter += rotationDirection;
-     }
-    lastStateCLK = currentStateCLK;  				//update last CLK state to be ready to detect next movement
-  }
+       if (currentStateCLK != lastStateCLK) {
+          counter += rotationDirection;
+       }
+       lastStateCLK = currentStateCLK;			//update last CLK state to be ready to detect next movement
+    }
+
+
+
   if (counter < 0)
     counter = counter + 30;
   else

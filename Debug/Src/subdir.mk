@@ -11,6 +11,7 @@ C_SRCS += \
 ../Src/gpio.c \
 ../Src/interrupt.c \
 ../Src/main.c \
+../Src/motor.c \
 ../Src/syscalls.c \
 ../Src/sysmem.c \
 ../Src/system_stm32g4xx.c \
@@ -23,6 +24,7 @@ OBJS += \
 ./Src/gpio.o \
 ./Src/interrupt.o \
 ./Src/main.o \
+./Src/motor.o \
 ./Src/syscalls.o \
 ./Src/sysmem.o \
 ./Src/system_stm32g4xx.o \
@@ -35,6 +37,7 @@ C_DEPS += \
 ./Src/gpio.d \
 ./Src/interrupt.d \
 ./Src/main.d \
+./Src/motor.d \
 ./Src/syscalls.d \
 ./Src/sysmem.d \
 ./Src/system_stm32g4xx.d \
@@ -48,7 +51,7 @@ Src/%.o Src/%.su: ../Src/%.c Src/subdir.mk
 clean: clean-Src
 
 clean-Src:
-	-$(RM) ./Src/adc.d ./Src/adc.o ./Src/adc.su ./Src/clockconfig.d ./Src/clockconfig.o ./Src/clockconfig.su ./Src/encoder.d ./Src/encoder.o ./Src/encoder.su ./Src/gpio.d ./Src/gpio.o ./Src/gpio.su ./Src/interrupt.d ./Src/interrupt.o ./Src/interrupt.su ./Src/main.d ./Src/main.o ./Src/main.su ./Src/syscalls.d ./Src/syscalls.o ./Src/syscalls.su ./Src/sysmem.d ./Src/sysmem.o ./Src/sysmem.su ./Src/system_stm32g4xx.d ./Src/system_stm32g4xx.o ./Src/system_stm32g4xx.su ./Src/timer.d ./Src/timer.o ./Src/timer.su
+	-$(RM) ./Src/adc.d ./Src/adc.o ./Src/adc.su ./Src/clockconfig.d ./Src/clockconfig.o ./Src/clockconfig.su ./Src/encoder.d ./Src/encoder.o ./Src/encoder.su ./Src/gpio.d ./Src/gpio.o ./Src/gpio.su ./Src/interrupt.d ./Src/interrupt.o ./Src/interrupt.su ./Src/main.d ./Src/main.o ./Src/main.su ./Src/motor.d ./Src/motor.o ./Src/motor.su ./Src/syscalls.d ./Src/syscalls.o ./Src/syscalls.su ./Src/sysmem.d ./Src/sysmem.o ./Src/sysmem.su ./Src/system_stm32g4xx.d ./Src/system_stm32g4xx.o ./Src/system_stm32g4xx.su ./Src/timer.d ./Src/timer.o ./Src/timer.su
 
 .PHONY: clean-Src
 

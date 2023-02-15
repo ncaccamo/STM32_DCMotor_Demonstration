@@ -4,6 +4,7 @@
 "./Src/gpio.o"
 "./Src/interrupt.o"
 "./Src/main.o"
+"./Src/motor.o"
 "./Src/syscalls.o"
 "./Src/sysmem.o"
 "./Src/system_stm32g4xx.o"

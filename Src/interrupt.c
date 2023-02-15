@@ -35,41 +35,48 @@ NVIC_EnableIRQ(EXTI15_10_IRQn);
 NVIC_SetPriority(TIM3_IRQn, 0);
 NVIC_EnableIRQ(TIM3_IRQn);
 
-
-
-
-
-
 }
 /************************************************************************************************/
 
 
 
-
+/************************************************************************************************/
+/**
+ * IRQ Handler and ISR for EXTI lines 10-15 interrupts.
+ * Parameters: none
+ * Returns: none
+ */
 void EXTI15_10_IRQHandler(void){
 
 	if ((EXTI->PR1 & (ENC_SW_PIN)) != 0) {				//check if the encoder switch pin is the one triggering interrupt
 		EXTI->PR1 = (ENC_SW_PIN);						//clear interrupt pending bit
 		togglePin(DBG_LED_PORT, DBG_LED_PIN);
 		printf("switch interrupt\n");
-		//fflush(stdout);
 
 		//These don't work? Interrupt keeps firing.
 		//NVIC_ClearPendingIRQ(EXTI15_10_IRQn);
 		//NVIC_EnableIRQ(EXTI15_10_IRQn);
 	}
-
-
-
 }
+/************************************************************************************************/
 
-
+/************************************************************************************************/
+/**
+ * IRQ Handler and ISR for TIM3 interrupts.
+ * Parameters: none
+ * Returns: none
+ */
 void TIM3_IRQHandler(void){
-	TIM3->SR = ~(TIM_SR_UIF);					//clear interrupt pending bit
-	togglePin(DBG_LED_PORT, DBG_LED_PIN);
-	encoderCount = encoderRotation();
-	printf("timer interrupt\n");
+	if (TIM3->SR & (TIM_SR_UIF) != 0) {				//check if the interrupt is caused by update event
+	   TIM3->SR = ~(TIM_SR_UIF);					//clear interrupt pending bit
+	   togglePin(DBG_LED_PORT, DBG_LED_PIN);
+	   encoderCount = encoderRotation();
+	//set motor speed based on encoder count
+	//measure motor speed
+	//update display based on motor speed
+	}
 }
+/************************************************************************************************/
 
 
 
