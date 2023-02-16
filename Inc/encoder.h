@@ -24,7 +24,7 @@
 
 
 //function prototypes
-int32_t encoderRotation();
+int32_t rotaryEncoderRotation();
 
 
 #endif

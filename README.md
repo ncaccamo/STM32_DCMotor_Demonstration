@@ -4,10 +4,11 @@ This project is intended to practice and demonstrate embedded software skills on
 
 Main objectives:
 1. Start a blank project and configure the microcontroller through registers utilizing basic drivers and headers provided by the manufacturer.
-2. Drive a DC motor using PWM. Utilize timers.
-3. Control the motor speed using a rotary encoder. Change the motor direction with the encoder's pushbutton. Utilize interrupts.
+2. Drive a DC motor using PWM.
+3. Control the motor speed using a rotary encoder. Change the motor direction with the encoder's pushbutton. 
 4. Measure the motor speed using a quadrature encoder on the motor.
-5. Show the motor speed on a small display. Utilize third party API to drive the display.
+5. Measure the motor's temperature with a temperature sensor.
+6. Show the motor speed and temperature on a small display. Utilize third party API to drive the display.
 
 
 Components:

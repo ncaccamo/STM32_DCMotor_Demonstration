@@ -28,14 +28,17 @@
 
 
 
-#if !defined(__SOFT_FP__) && defined(__ARM_FP)
-  #warning "FPU is not initialized, but the project is compiling for an FPU. Please initialize the FPU before use."
-#endif
+//#if !defined(__SOFT_FP__) && defined(__ARM_FP)
+//  #warning "FPU is not initialized, but the project is compiling for an FPU. Please initialize the FPU before use."
+//#endif
 
-int32_t encoderCount;
-int32_t encoderDirection;
-int32_t encoderButtonState;
+int16_t gRotaryEncoderCount= 0;
+int16_t gMotorDuty = 0;
+int16_t gMotorDirection = 0;
+int16_t gMotorSpeed = 0;
+int16_t gTemperature = 0;
 
+int32_t motorEnc;
 
 
 int main(void)
@@ -46,13 +49,17 @@ int main(void)
 	TIM3Init();
 	TIM4Init();
 	TIM8Init();
+	TIM15Init();
 	setMotorDirection(MOTOR_FORWARD);
+	setMotorDuty(0);
 	printf("Initialization done.\n");
 
 	while(1){
-
+		motorEnc = TIM4->CNT;
 	}
 }
+
+
 
 
 

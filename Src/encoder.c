@@ -22,7 +22,7 @@ int8_t rotationDirection = 0;
  * Noisy encoder requires handling the states while the knob is moving and also when it stops.
  *
  */
-int32_t encoderRotation()
+int32_t rotaryEncoderRotation()
 {
 
 currentStateCLK = readPin(ENC_CLK_PORT, ENC_CLK_PIN);
@@ -40,15 +40,15 @@ currentStateDT = readPin(ENC_DT_PORT, ENC_DT_PIN);
        if (currentStateCLK != lastStateCLK) {
           counter += rotationDirection;
        }
-       lastStateCLK = currentStateCLK;			//update last CLK state to be ready to detect next movement
+       lastStateCLK = currentStateCLK;			    //update last CLK state to be ready to detect next movement
     }
 
 
 
-  if (counter < 0)
-    counter = counter + 30;
-  else
-   counter = counter % 30;
+  if (counter < 0) 								    //keep counter between 0 and 100
+    counter = 0;
+  else if (counter > 100)
+   counter = 100;
 
  return counter;
 }

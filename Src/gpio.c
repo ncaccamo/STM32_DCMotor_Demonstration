@@ -19,8 +19,8 @@ void gpioInit(){
 	//clock for GPIO enabled in clockconfig.c
 
 	//clear MODER registers, but leave JTAG pins in reset state
-	GPIOA->MODER &= ~(0x00FFFFFF);
-	GPIOB->MODER &= ~(0xFFFFF00F);
+	GPIOA->MODER &= ~(0x03FFFFFF);
+	GPIOB->MODER &= ~(0xFFFFFC3F);
 	GPIOC->MODER &= ~(0xFFFFFFFF);
 
 
@@ -93,7 +93,7 @@ void gpioInit(){
  * Returns: PIN_LOW or PIN_HIGH for state of pin.
  */
 
-int32_t readPin(GPIO_TypeDef *GPIOx, uint16_t GPIO_PIN_x){
+int16_t readPin(GPIO_TypeDef *GPIOx, uint16_t GPIO_PIN_x){
 	if ((GPIOx->IDR & GPIO_PIN_x) != PIN_LOW) {
 		return PIN_HIGH;
 	}
@@ -114,7 +114,7 @@ int32_t readPin(GPIO_TypeDef *GPIOx, uint16_t GPIO_PIN_x){
  * Returns: none
  */
 
-void setPin(GPIO_TypeDef *GPIOx, uint16_t GPIO_PIN_x, pinState_t pinState){
+void setPin(GPIO_TypeDef *GPIOx, uint16_t GPIO_PIN_x, pinstate_t pinState){
 	if (pinState == PIN_LOW){
 	GPIOx->BSRR = (GPIO_PIN_x << 16U);          //set pin LOW
 	}

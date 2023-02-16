@@ -23,7 +23,8 @@ typedef enum {
 
 //function prototypes
 void setMotorDirection(motordirection_t direction);
-void setMotorSpeed();
+void setMotorDuty(int16_t duty);
+int16_t measureMotorSpeed();
 
 
 #endif

@@ -14,6 +14,7 @@
 void TIM3Init();
 void TIM4Init();
 void TIM8Init();
+void TIM15Init();
 
 
 

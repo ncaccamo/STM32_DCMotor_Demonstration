@@ -81,18 +81,18 @@
 
 
 
-typedef enum{
+typedef enum {
 	PIN_HIGH = 1,
 	PIN_LOW = 0
-}pinState_t;
+}pinstate_t;
 
 
 
 
 //function prototypes
 void gpioInit();
-int32_t readPin(GPIO_TypeDef *GPIOx, uint16_t GPIO_PIN_x);
-void setPin(GPIO_TypeDef *GPIOx, uint16_t GPIO_PIN_x, pinState_t pinState);
+int16_t readPin(GPIO_TypeDef *GPIOx, uint16_t GPIO_PIN_x);
+void setPin(GPIO_TypeDef *GPIOx, uint16_t GPIO_PIN_x, pinstate_t pinState);
 void togglePin(GPIO_TypeDef *GPIOx, uint16_t GPIO_PIN_x);
 
 

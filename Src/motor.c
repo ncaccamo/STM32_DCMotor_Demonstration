@@ -6,18 +6,10 @@
  ******************************************************************************
  */
 
+#include <stm32g431xx.h>
 #include <motor.h>
 #include <gpio.h>
 
-
-/**
- * Pulse Width Modulation mode allows to generate a signal with a frequency determined by
-the value of the TIMx_ARR register and a duty cycle determined by the value of the
-TIMx_CCRx register.
-
-
-
- */
 
 
 /************************************************************************************************/
@@ -26,8 +18,7 @@ TIMx_CCRx register.
  * Parameters: Direction of the motor, either forward or reverse.
  * Returns: none
  */
-void setMotorDirection(motordirection_t direction){				//must check that motor is stopped
-	//if (motor)
+void setMotorDirection(motordirection_t direction){
 			switch (direction) {
 				case MOTOR_FORWARD:
 					setPin(MOT_DR_IN1_PORT, MOT_DR_IN1_PIN, PIN_HIGH);		//in1 HIGH, in2 LOW for forward
@@ -38,7 +29,6 @@ void setMotorDirection(motordirection_t direction){				//must check that motor i
 					setPin(MOT_DR_IN2_PORT, MOT_DR_IN2_PIN, PIN_HIGH);
 					break;
 			}
-
 }
 /************************************************************************************************/
 
@@ -46,10 +36,25 @@ void setMotorDirection(motordirection_t direction){				//must check that motor i
 /************************************************************************************************/
 /**
  * Function to set the desired speed of the motor.
- * Parameters:
+ * Parameters: Desired duty cycle from 1-100.
  * Returns: none
  */
-void setMotorSpeed(){					//input speed, no output
-										//set duty cycle by CCR1 register
+void setMotorDuty(int16_t duty){					//input speed, no output
+	if (duty <= 100 && duty >= 0){
+	   TIM8->CCR1 = duty;							//set duty cycle by CCR1 register
+	}
+}
+/************************************************************************************************/
+
+
+/************************************************************************************************/
+/**
+ * Function to measure the speed of the motor.
+ * Parameters: none
+ * Returns: Speed of the motor in RPM
+ */
+int16_t measureMotorSpeed(){
+	int16_t motorEncCounter = TIM4->CNT;
+	return motorEncCounter;
 }
 /************************************************************************************************/

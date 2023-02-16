@@ -1,1 +1,1 @@
-../Src/encoder.c:25:9:encoderRotation	8	static
+../Src/encoder.c:25:9:rotaryEncoderRotation	8	static

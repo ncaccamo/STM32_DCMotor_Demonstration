@@ -10,9 +10,11 @@
 #define MAIN_H
 
 
-extern int32_t encoderCount;
-extern int32_t encoderDirection;
-extern int32_t encoderButtonState;
+extern int16_t gRotaryEncoderCount;
+extern int16_t gMotorDuty;
+extern int16_t gMotorDirection;
+extern int16_t gMotorTemperature;
+extern int16_t gMotorSpeed;
 
 
 int _write(int file, char *ptr, int len);

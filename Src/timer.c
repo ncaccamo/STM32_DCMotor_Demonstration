@@ -19,7 +19,7 @@
 void TIM3Init(){
 	//clock enabled in clockconfig.c
 	TIM3->CR1 |= (0x01 << TIM_CR1_URS_Pos);		//interrupts only occur on update (overflow/underflow)
-	TIM3->DIER |= (0x01 << TIM_DIER_UIE_Pos);	//interrupt is enabled
+	TIM3->DIER |= (0x01 << TIM_DIER_UIE_Pos);	//update interrupt is enabled
 	TIM3->PSC = 85-1; 						    //prescalar value (set to yield interrupt at 30 Hz)
 	TIM3->CR1 |= (0x01 << TIM_CR1_CEN_Pos);		//counter is enabled
 
@@ -45,9 +45,11 @@ void TIM4Init(){
 	TIM4->CCER &= ~(0x01 << TIM_CCER_CC1NP_Pos);
 	TIM4->CCER &= ~(0x01 << TIM_CCER_CC2P_Pos);    //tim_ti2fp2 noninverted
 	TIM4->CCER &= ~(0x01 << TIM_CCER_CC2NP_Pos);
-	TIM4->PSC &= ~(0x01 << TIM_PSC_PSC_Pos);	   //prescalar set to 0
+	//TIM4->CCER |= (0x01 << TIM_CCER_CC1E_Pos);
+	//TIM4->CCER |= (0x01 << TIM_CCER_CC2E_Pos);
+	TIM4->PSC = 1-1;                           	   //prescalar set to 0
 	TIM4->CR1 |= (0x01 << TIM_CR1_ARPE_Pos);	   //enable auto-reload preload
-	TIM4->ARR |= (0x00FF << TIM_ARR_ARR_Pos);	   //auto-reload register
+	TIM4->ARR = 0xFFFF;                     	   //auto-reload register
 	TIM4->CR1 |= (0x01 << TIM_CR1_CEN_Pos);        //counter is enabled
 
 }
@@ -78,6 +80,24 @@ void TIM8Init(){
 }
 /************************************************************************************************/
 
+
+/************************************************************************************************/
+/**
+ * Function to initialize and start Timer 15. An interrupt will be generated periodically.
+ * Parameters: none
+ * Returns: none
+ */
+void TIM15Init(){
+	//clock enabled in clockconfig.c
+	TIM15->CR1 |= (0x01 << TIM_CR1_URS_Pos);	//interrupts only occur on update (overflow/underflow)
+	TIM15->DIER |= (0x01 << TIM_DIER_UIE_Pos);	//update interrupt is enabled
+	TIM15->PSC = 1700-1; 						//prescalar value, so the input clock is 100Mhz
+	TIM15->ARR = 50000-1;						//auto-reload, so this timer will trigger every 500ms
+	TIM15->CR1 |= (0x01 << TIM_CR1_CEN_Pos);	//counter is enabled
+
+
+}
+/************************************************************************************************/
 
 
 
