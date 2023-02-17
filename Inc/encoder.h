@@ -1,6 +1,6 @@
 /**
  ******************************************************************************
- * @file           : gpio.c
+ * @file           : encoder.h
  * @author         : Nicholas Caccamo
  * @brief          : Header for encoder configuration and driver
  ******************************************************************************
@@ -11,20 +11,18 @@
 #include <stm32g431xx.h>
 
 
-//#define ENCODER_ROTARY_CLK_PORT 			GPIOA
-//#define ENCODER_ROTARY_CLK_SIGNAL 			(ENCODER_ROTARY_CLK_PORT->IDR) & (GPIO_IDR_ID11_Pos)
-//#define ENCODER_ROTARY_DT_PORT 				GPIOA
-//#define ENCODER_ROTARY_DT_SIGNAL 			(ENCODER_ROTARY_DT_PORT->IDR) & GPIO_IDR_ID12_Pos
-//#define ENCODER_ROTARY_SW_PORT 				GPIOB
-//#define ENCODER_ROTARY_SW_SIGNAL 			(ENCODER_ROTARY_SW_PORT->IDR) & GPIO_IDR_ID12_Pos
-//
-//#define ENCODER_MOTOR_SELECT_PORT 			GPIOC
-//#define ENCODER_MOTOR_A_SIGNAL 				GPIO_IDR_ID2_Pos
-//#define ENCODER_MOTOR_B_SIGNAL 				GPIO_IDR_ID3_Pos
+typedef struct{
+    int16_t lastStateCLK;
+    int8_t currentStateCLK;
+    int8_t currentStateDT;
+    int32_t counter;
+    int8_t rotationDirection;
+}rotaryEncoderInstance_t;
 
 
 //function prototypes
-int32_t rotaryEncoderRotation();
+void rotaryEncoderRotation();
+int32_t queryRotaryEncoderCount();
 
 
 #endif

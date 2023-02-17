@@ -32,30 +32,22 @@
 //  #warning "FPU is not initialized, but the project is compiling for an FPU. Please initialize the FPU before use."
 //#endif
 
-volatile int16_t gRotaryEncoderCount= 0;
-volatile int16_t gMotorDuty = 0;
-volatile int16_t gMotorEncoderCount= 0;
-volatile int16_t gMotorDirection = 0;
-volatile int16_t gMotorSpeed = 0;
-volatile int16_t gTemperature = 0;
-
-
 int main(void)
 {
-	sysClockConfig();
-	gpioInit();
-	interruptInit();
-	TIM3Init();
-	TIM4Init();
-	TIM8Init();
-	TIM15Init();
-	setMotorDirection(MOTOR_FORWARD);
-	setMotorDuty(0);
-	printf("Initialization done.\n");
+    sysClockConfig();
+    gpioInit();
+    interruptInit();
+    TIM3Init();
+    TIM4Init();
+    TIM8Init();
+    TIM15Init();
+    attemptSetMotorDirection(MOTOR_FORWARD);
+    setMotorDuty(0);
+    printf("Initialization done.\n");
 
-	while(1){
+    while(1){
 
-	}
+    }
 }
 
 
@@ -66,10 +58,10 @@ int main(void)
 //function to allow printing to console
 int _write(int file, char *ptr, int len)
 {
-  int i=0;
-  for(i=0 ; i<len ; i++)
-    ITM_SendChar((*ptr++));
-  return len;
+    int i=0;
+    for(i=0 ; i<len ; i++)
+        ITM_SendChar((*ptr++));
+    return len;
 }
 
 

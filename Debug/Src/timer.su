@@ -1,4 +1,4 @@
 ../Src/timer.c:19:6:TIM3Init	4	static
-../Src/timer.c:37:6:TIM4Init	4	static
-../Src/timer.c:65:6:TIM8Init	4	static
-../Src/timer.c:90:6:TIM15Init	4	static
+../Src/timer.c:48:6:TIM4Init	4	static
+../Src/timer.c:85:6:TIM8Init	4	static
+../Src/timer.c:126:6:TIM15Init	4	static

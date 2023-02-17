@@ -82,8 +82,8 @@
 
 
 typedef enum {
-	PIN_HIGH = 1,
-	PIN_LOW = 0
+    PIN_HIGH = 1,
+    PIN_LOW = 0
 }pinstate_t;
 
 

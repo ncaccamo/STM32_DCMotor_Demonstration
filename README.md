@@ -46,7 +46,7 @@ Issues encountered, learnings:
 - Learned that for clearing pending interrupt flags, it makes the most sense to write the bit directly instead of | or & with a mask. In STM32, these registers are cleared by writing a 0 or 1 depending, and so the remaining bits are unaffected anyway. Example: rc_w0 bit is cleared by writing zero so it can be cleared by TIM4->SR = ~TIM_SR_UIF.
 - The rotary encoder seems noisy so I researched some encoder examples online and adapted a state machine that accounts for when the encoder moves and stops. This will replace using a timer in encoder mode.
 - For reference, to calculate the update frequency of a timer: TIM_CLK / (PSC + 1) / (ARR + 1) / (RSR + 1), the terms being prescaler (PSC), auto-reload register (ARR), and repetition counter (RCR). The result is in hertz and must be converted to seconds (1/hz).
-- For reference, the frequency of PWM is calculated by TIM_CLK / (ARR + 1) / (PSC + 1). Duty cycle is calculated by CCRx/ARRx, where CCRx is the reload value of the capture/compare register. The result is in hertz.
+- For reference, the frequency of PWM is calculated by TIM_CLK / (PSC + 1) / (ARR + 1), because it is based on a timer. The result is in hertz. Duty cycle is calculated by CCRx/ARRx, where CCRx is the reload value of the capture/compare register. 
 - The initial timer interrupt frequency of 200ms (5hz) was much too slow, and there were many errors in detecting the encoder movement, such as missed pulses and failure to switch the direction flag. Polling at 30hz is working better.
 
 
