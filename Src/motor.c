@@ -9,6 +9,11 @@
 #include <stm32g431xx.h>
 #include <motor.h>
 #include <gpio.h>
+#include <main.h>
+
+
+motorEncoderInstance_t motorEncoder;
+
 
 
 
@@ -54,7 +59,51 @@ void setMotorDuty(int16_t duty){					//input speed, no output
  * Returns: Speed of the motor in RPM
  */
 int16_t measureMotorSpeed(){
-	int16_t motorEncCounter = TIM4->CNT;
-	return motorEncCounter;
+	motorEncoder.currentCount = gMotorEncoderCount;
+	motorEncoder.counterDirection = (TIM4->CR1 & TIM_CR1_DIR);
+	if (motorEncoder.currentCount == motorEncoder.previousCount) {						//motor not moving, speed is zero
+		motorEncoder.motorRPM = 0;
+		return motorEncoder.motorRPM;
+		}
+
+
+	if (motorEncoder.counterDirection == 0){											//counter is counting up
+			if (motorEncoder.currentCount < motorEncoder.previousCount){				//no overflow, counter overflow has occurred
+			   motorEncoder.countDifference = motorEncoder.currentCount + (MOTOR_ENCODER_TIMER_ARR - motorEncoder.previousCount);
+			}
+			else {																		//calculate difference normally
+				motorEncoder.countDifference = motorEncoder.currentCount - motorEncoder.previousCount;
+			}
+	}
+
+	else {																				//counter is counting down
+		if (motorEncoder.currentCount > motorEncoder.previousCount){					//counter overflow has occurred
+			motorEncoder.countDifference = motorEncoder.previousCount + (MOTOR_ENCODER_TIMER_ARR - motorEncoder.currentCount);
+		}
+		else {																			//no overflow, calculate difference normally
+		   motorEncoder.countDifference = motorEncoder.previousCount - motorEncoder.currentCount;
+		}
+
+	}
+
+	motorEncoder.motorRPM = converttoRPM(motorEncoder.countDifference);
+	motorEncoder.previousCount = motorEncoder.currentCount;
+
+	return motorEncoder.motorRPM;
+
 }
+/************************************************************************************************/
+
+
+/************************************************************************************************/
+/**
+ * Function to convert encoder count difference and sampling rate to RPM.
+ * Parameters: none
+ * Returns: Speed of the motor in RPM
+ */
+int16_t converttoRPM(int32_t encoderCountDifference){
+	int16_t RPM = (encoderCountDifference * 60) / (MOTOR_ENCODER_CPR * MOTOR_GEARBOX_RATIO * MOTOR_ENCODER_SAMPLING_TIME);
+	return RPM;
+}
+
 /************************************************************************************************/

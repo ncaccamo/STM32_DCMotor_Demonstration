@@ -1,3 +1,4 @@
-../Src/motor.c:21:6:setMotorDirection	16	static
-../Src/motor.c:42:6:setMotorDuty	16	static
-../Src/motor.c:56:9:measureMotorSpeed	16	static
+../Src/motor.c:26:6:setMotorDirection	16	static
+../Src/motor.c:47:6:setMotorDuty	16	static
+../Src/motor.c:61:9:measureMotorSpeed	8	static
+../Src/motor.c:104:9:converttoRPM	24	static

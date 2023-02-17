@@ -32,13 +32,12 @@
 //  #warning "FPU is not initialized, but the project is compiling for an FPU. Please initialize the FPU before use."
 //#endif
 
-int16_t gRotaryEncoderCount= 0;
-int16_t gMotorDuty = 0;
-int16_t gMotorDirection = 0;
-int16_t gMotorSpeed = 0;
-int16_t gTemperature = 0;
-
-int32_t motorEnc;
+volatile int16_t gRotaryEncoderCount= 0;
+volatile int16_t gMotorDuty = 0;
+volatile int16_t gMotorEncoderCount= 0;
+volatile int16_t gMotorDirection = 0;
+volatile int16_t gMotorSpeed = 0;
+volatile int16_t gTemperature = 0;
 
 
 int main(void)
@@ -55,7 +54,7 @@ int main(void)
 	printf("Initialization done.\n");
 
 	while(1){
-		motorEnc = TIM4->CNT;
+
 	}
 }
 

@@ -3,4 +3,4 @@ C:/Users/Nicholas/STM32CubeIDE/workspace_1.11.2/STM32_DCMotor_Encoder_Display/Dr
 ../Src/interrupt.c:25:6:interruptInit	8	static
 ../Src/interrupt.c:55:6:EXTI15_10_IRQHandler	8	static
 ../Src/interrupt.c:89:6:TIM3_IRQHandler	8	static
-../Src/interrupt.c:109:6:TIM1_BRK_TIM15_IRQHandler	4	static
+../Src/interrupt.c:110:6:TIM1_BRK_TIM15_IRQHandler	4	static

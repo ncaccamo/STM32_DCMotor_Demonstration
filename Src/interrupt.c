@@ -91,6 +91,7 @@ void TIM3_IRQHandler(void){
 	   TIM3->SR = ~(TIM_SR_UIF);					    //clear interrupt pending bit
 	   gRotaryEncoderCount = rotaryEncoderRotation();				//check encoder movement, update count
 	   setMotorDuty(gRotaryEncoderCount);					//set motor duty cycle based on encoder count
+	   gMotorEncoderCount = TIM4->CNT;
 	   gMotorSpeed = measureMotorSpeed();				 //measure the motor speed
 	//measure motor temperature (consider longer time)
 	//update display based on motor speed and temp
@@ -102,7 +103,7 @@ void TIM3_IRQHandler(void){
 
 /************************************************************************************************/
 /**
- * IRQ Handler and ISR for TIM1 Break, Transition error, Index error and TIM15 global interrupt
+ * IRQ Handler and ISR for "TIM1 Break, Transition error, Index error and TIM15 global interrupt"
  * Parameters: none
  * Returns: none
  */

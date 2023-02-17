@@ -30,7 +30,7 @@ void TIM3Init(){
 
 /************************************************************************************************/
 /**
- * Function to initialize and start Timer 4.
+ * Function to initialize and start Timer 4. This timer is used in encoder mode to read the motor encoder.
  * Parameters: none
  * Returns: none
  */
@@ -48,7 +48,7 @@ void TIM4Init(){
 	//TIM4->CCER |= (0x01 << TIM_CCER_CC1E_Pos);
 	//TIM4->CCER |= (0x01 << TIM_CCER_CC2E_Pos);
 	TIM4->PSC = 1-1;                           	   //prescalar set to 0
-	TIM4->CR1 |= (0x01 << TIM_CR1_ARPE_Pos);	   //enable auto-reload preload
+	//TIM4->CR1 |= (0x01 << TIM_CR1_ARPE_Pos);	   //enable auto-reload preload
 	TIM4->ARR = 0xFFFF;                     	   //auto-reload register
 	TIM4->CR1 |= (0x01 << TIM_CR1_CEN_Pos);        //counter is enabled
 
@@ -58,7 +58,7 @@ void TIM4Init(){
 
 /************************************************************************************************/
 /**
- * Function to initialize and start Timer 8.
+ * Function to initialize and start Timer 8. This timer is used to generate PWM output for motor control.
  * Parameters: none
  * Returns: none
  */
@@ -93,6 +93,7 @@ void TIM15Init(){
 	TIM15->DIER |= (0x01 << TIM_DIER_UIE_Pos);	//update interrupt is enabled
 	TIM15->PSC = 1700-1; 						//prescalar value, so the input clock is 100Mhz
 	TIM15->ARR = 50000-1;						//auto-reload, so this timer will trigger every 500ms
+	TIM15->CR1 |= (0x01 << TIM_CR1_ARPE_Pos);	//enable auto-reload
 	TIM15->CR1 |= (0x01 << TIM_CR1_CEN_Pos);	//counter is enabled
 
 
