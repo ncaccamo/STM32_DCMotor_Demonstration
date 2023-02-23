@@ -24,4 +24,5 @@ C_DEPS :=
 SUBDIRS := \
 Src \
 Startup \
+u8g2_csrc \
 

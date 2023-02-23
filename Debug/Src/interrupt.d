@@ -9,7 +9,9 @@ Src/interrupt.o: ../Src/interrupt.c ../Inc/interrupt.h \
  ../Inc/main.h ../Inc/gpio.h \
  C:/Users/Nicholas/STM32CubeIDE/workspace_1.11.2/STM32_DCMotor_Encoder_Display/Drivers/CMSIS/Device/ST/STM32G4xx/Include/stm32g4xx.h \
  C:/Users/Nicholas/STM32CubeIDE/workspace_1.11.2/STM32_DCMotor_Encoder_Display/Drivers/CMSIS/Device/ST/STM32G4xx/Include/stm32g431xx.h \
- ../Inc/encoder.h ../Inc/motor.h
+ ../Inc/encoder.h ../Inc/motor.h ../Inc/timer.h ../Inc/display.h \
+ C:/Users/Nicholas/STM32CubeIDE/workspace_1.11.2/STM32_DCMotor_Encoder_Display/u8g2_csrc/u8g2.h \
+ C:/Users/Nicholas/STM32CubeIDE/workspace_1.11.2/STM32_DCMotor_Encoder_Display/u8g2_csrc/u8x8.h
 ../Inc/interrupt.h:
 C:/Users/Nicholas/STM32CubeIDE/workspace_1.11.2/STM32_DCMotor_Encoder_Display/Drivers/CMSIS/Device/ST/STM32G4xx/Include/stm32g431xx.h:
 C:/Users/Nicholas/STM32CubeIDE/workspace_1.11.2/STM32_DCMotor_Encoder_Display/Drivers/CMSIS/Include/core_cm4.h:
@@ -24,3 +26,7 @@ C:/Users/Nicholas/STM32CubeIDE/workspace_1.11.2/STM32_DCMotor_Encoder_Display/Dr
 C:/Users/Nicholas/STM32CubeIDE/workspace_1.11.2/STM32_DCMotor_Encoder_Display/Drivers/CMSIS/Device/ST/STM32G4xx/Include/stm32g431xx.h:
 ../Inc/encoder.h:
 ../Inc/motor.h:
+../Inc/timer.h:
+../Inc/display.h:
+C:/Users/Nicholas/STM32CubeIDE/workspace_1.11.2/STM32_DCMotor_Encoder_Display/u8g2_csrc/u8g2.h:
+C:/Users/Nicholas/STM32CubeIDE/workspace_1.11.2/STM32_DCMotor_Encoder_Display/u8g2_csrc/u8x8.h:

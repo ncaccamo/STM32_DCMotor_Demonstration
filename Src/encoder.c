@@ -2,7 +2,7 @@
  ******************************************************************************
  * @file           : encoder.c
  * @author         : Nicholas Caccamo
- * @brief          : Encoder configuration and driver
+ * @brief          : Encoder configuration and functions
  ******************************************************************************
  */
 

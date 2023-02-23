@@ -22,6 +22,7 @@ void gpioInit(){
     GPIOA->MODER &= ~(0x03FFFFFF);
     GPIOB->MODER &= ~(0xFFFFFC3F);
     GPIOC->MODER &= ~(0xFFFFFFFF);
+    GPIOD->MODER &= ~(0xFFFFFFFF);
 
 
 
@@ -37,13 +38,17 @@ void gpioInit(){
 
 
 
-    //set PA6, PA9, PC7 as output
-    GPIOA->MODER |= (0x01 << GPIO_MODER_MODE6_Pos);  //Display_DC
-    GPIOA->MODER |= (0x01 << GPIO_MODER_MODE9_Pos);  //Motor Driver In2
-    GPIOC->MODER |= (0x01 << GPIO_MODER_MODE7_Pos);  //Motor Driver In1
+    //set outputs
+    GPIOA->MODER |= (0x01 << GPIO_MODER_MODE15_Pos);     //Display_RES
+    GPIOC->MODER |= (0x01 << GPIO_MODER_MODE11_Pos);     //Display_CS
+    GPIOD->MODER |= (0x01 << GPIO_MODER_MODE2_Pos);      //Display_DC
+    GPIOA->MODER |= (0x01 << GPIO_MODER_MODE9_Pos);      //Motor Driver In2
+    GPIOC->MODER |= (0x01 << GPIO_MODER_MODE7_Pos);      //Motor Driver In1
 
-    //set PA6, PA9, PC7 as push-pull output
-    GPIOA->OTYPER &= ~(0x01 << GPIO_MODER_MODE6_Pos);
+    //set outputs as push-pull
+    GPIOA->OTYPER &= ~(0x01 << GPIO_MODER_MODE15_Pos);
+    GPIOC->OTYPER &= ~(0x01 << GPIO_MODER_MODE11_Pos);
+    GPIOD->OTYPER &= ~(0x01 << GPIO_MODER_MODE2_Pos);
     GPIOA->OTYPER &= ~(0x01 << GPIO_MODER_MODE9_Pos);
     GPIOC->OTYPER &= ~(0x01 << GPIO_MODER_MODE7_Pos);
 
@@ -61,15 +66,13 @@ void gpioInit(){
     GPIOB->MODER |= (0x02 << GPIO_MODER_MODE6_Pos);
     GPIOB->AFR[0] |= (0x05 << GPIO_AFRL_AFSEL6_Pos);		//TIM8_CH1
 
-    //set PA4, PA5, PA7 to alternate function mode (SPI1)
-    GPIOA->MODER |= (0x02 << GPIO_MODER_MODE4_Pos);
-    GPIOA->MODER |= (0x02 << GPIO_MODER_MODE5_Pos);
-    GPIOA->MODER |= (0x02 << GPIO_MODER_MODE7_Pos);
+    //set PC10, PC12 alternate function mode (SPI3)
+    GPIOC->MODER |= (0x02 << GPIO_MODER_MODE10_Pos);
+    GPIOC->MODER |= (0x02 << GPIO_MODER_MODE12_Pos);
 
-    //set PA4, PA5, PA7 alternate function to AF5 (SPI1)
-    GPIOA->AFR[0] |= (0x05 << GPIO_AFRL_AFSEL4_Pos);		//SPI1_NSS
-    GPIOA->AFR[0] |= (0x05 << GPIO_AFRL_AFSEL5_Pos);		//SPI1_SCK
-    GPIOA->AFR[0] |= (0x05 << GPIO_AFRL_AFSEL7_Pos);		//SPI1_MOSI
+    //set PC10, PC12 alternate function to AF6 (SPI3)
+    GPIOC->AFR[1] |= (0x06 << GPIO_AFRH_AFSEL10_Pos);		//SPI3_SCK
+    GPIOC->AFR[1] |= (0x06 << GPIO_AFRH_AFSEL12_Pos);		//SPI3_MOSI
 
     //set PA0? to ADC input
 

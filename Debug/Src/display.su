@@ -1,0 +1,4 @@
+../Src/display.c:26:6:displayInit	8	static
+../Src/display.c:43:9:u8x8_stm32_gpio_and_delay	24	static
+../Src/display.c:75:9:u8x8_byte_4wire_hw_spi	32	static
+../Src/display.c:116:6:drawDisplay	40	static

@@ -16,6 +16,7 @@
 
 static motorStatus_t motorStatus;
 static motorEncoderInstance_t motorEncoder;
+const int8_t sizeBuffer = 50;
 
 /************************************************************************************************/
 /**
@@ -77,6 +78,7 @@ void measureMotorSpeed(){
     //motor not moving, speed is zero
     if (motorEncoder.currentCount == motorEncoder.previousCount) {
         motorStatus.motorSpeed = 0;
+        motorStatus.motorSpeedAverage = calcAverageRPM();
         return;
     }
 
@@ -103,7 +105,10 @@ void measureMotorSpeed(){
     }
 
     motorStatus.motorSpeed = converttoRPM(motorEncoder.countDifference);
+    motorStatus.motorSpeedAverage = calcAverageRPM();
     motorEncoder.previousCount = motorEncoder.currentCount;
+
+
 }
 /************************************************************************************************/
 
@@ -119,6 +124,34 @@ int16_t converttoRPM(int32_t encoderCountDifference){
     return RPM;
 }
 
+/************************************************************************************************/
+
+/************************************************************************************************/
+/**
+ * Function to calculate average speed of the motor over a number of measurements in a rotating buffer. Used to display
+ * an RPM that does not fluctuate as much as direct polling of measurements. Uses the latest motor speed calculation in the
+ * status struct to update the buffer and recalculate average.
+ * Parameters: none
+ * Returns: Average speed of the motor in RPM.
+ */
+int16_t calcAverageRPM(){
+    //add latest measurement to buffer
+    static int8_t bufferIndex = 0;
+    motorStatus.motorSpeedBuffer[bufferIndex] = motorStatus.motorSpeed;
+    bufferIndex++;
+    if (bufferIndex > sizeBuffer-1) bufferIndex = 0;
+
+    //calculate sum of speed measurements in buffer
+    int16_t sum = 0;
+    for (int8_t i = 0; i < sizeBuffer; i++){
+        sum += motorStatus.motorSpeedBuffer[i];
+    }
+
+    //calculate and return average
+    int16_t average;
+    average = sum / sizeBuffer;
+    return average;
+}
 /************************************************************************************************/
 
 /************************************************************************************************/
@@ -147,12 +180,12 @@ void updateMotorDirectionState(int16_t direction){
 
 /************************************************************************************************/
 /**
- * Function to query the motor speed variable.
+ * Function to query the average motor speed variable.
  * Parameters: none
  * Returns: Speed of the motor in RPM.
  */
-int16_t queryMotorSpeed(){
-    return motorStatus.motorSpeed;
+int16_t queryAverageMotorSpeed(){
+    return motorStatus.motorSpeedAverage;
 }
 /************************************************************************************************/
 

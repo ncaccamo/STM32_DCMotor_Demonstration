@@ -9,9 +9,7 @@
 #ifndef MAIN_H
 #define MAIN_H
 
-
-extern volatile int16_t gRotaryEncoderCount;
-extern volatile int16_t gMotorTemperature;
+extern int8_t gDrawFlag;
 
 
 int _write(int file, char *ptr, int len);

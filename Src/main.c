@@ -25,8 +25,10 @@
 #include <interrupt.h>
 #include <encoder.h>
 #include <motor.h>
+#include <spi.h>
+#include <display.h>
 
-
+int8_t gDrawFlag = 0;
 
 //#if !defined(__SOFT_FP__) && defined(__ARM_FP)
 //  #warning "FPU is not initialized, but the project is compiling for an FPU. Please initialize the FPU before use."
@@ -41,12 +43,20 @@ int main(void)
     TIM4Init();
     TIM8Init();
     TIM15Init();
+    SPI3Init();
+    SysTick_Config(SystemCoreClock / 1000);
     attemptSetMotorDirection(MOTOR_FORWARD);
     setMotorDuty(0);
+    displayInit();
     printf("Initialization done.\n");
 
-    while(1){
 
+
+    while(1){
+        if (gDrawFlag == 1){
+            gDrawFlag = 0;
+            drawDisplay();
+        }
     }
 }
 

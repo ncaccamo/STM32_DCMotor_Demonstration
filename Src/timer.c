@@ -5,9 +5,11 @@
  * @brief          : Timer configuration
  ******************************************************************************
  */
-
+#include <stdint.h>
 #include <timer.h>
 #include <stm32g431xx.h>
+
+volatile uint16_t gMsTicks;
 
 
 /************************************************************************************************/
@@ -127,6 +129,8 @@ void TIM15Init(){
     //clock enabled in clockconfig.c
     //interrupts only occur on update (overflow/underflow)
     TIM15->CR1 |= (0x01 << TIM_CR1_URS_Pos);
+    //auto-reload preload enabled
+    TIM15->CR1 |= (0x01 << TIM_CR1_ARPE_Pos);
     //update interrupt is enabled
     TIM15->DIER |= (0x01 << TIM_DIER_UIE_Pos);
     //prescalar value, so the input clock is 100Mhz
@@ -145,20 +149,16 @@ void TIM15Init(){
 }
 /************************************************************************************************/
 
-
-
 /************************************************************************************************/
 /**
- * Function to initialize and start SysTick.
- * Parameters: none
+ * Function to delay in increments of millisecond.
+ * Parameters: Number of milliseconds to delay.
  * Returns: none
  */
-
-
-
-
+void delayMs(uint16_t ms){
+    gMsTicks = 0;
+    while (gMsTicks < ms);
+}
 /************************************************************************************************/
-
-
 
 

@@ -21,7 +21,7 @@ void sysClockConfig(){
     //set AHB, APB2, APB1 prescalar
     RCC->CFGR |= (0x00 << RCC_CFGR_HPRE_Pos);   //AHB prescalar no division
     RCC->CFGR |= (0x00 << RCC_CFGR_PPRE2_Pos);  //APB2 prescalar no division
-    RCC->CFGR |= (0x00 << RCC_CFGR_PPRE1_Pos);  //APB1 prescalar no division      //TODO: TIM4 prescalar
+    RCC->CFGR |= (0x00 << RCC_CFGR_PPRE1_Pos);  //APB1 prescalar no division
 
     //set PLL configuration register
     RCC->PLLCFGR |= (0x2 << RCC_PLLCFGR_PLLSRC_Pos);   //HSI16 as PLL clock entry
@@ -46,10 +46,11 @@ void sysClockConfig(){
     //enable clock for System Configuration controller
     RCC->APB2ENR |= (0x01 << RCC_APB2SMENR_SYSCFGSMEN_Pos);
 
-    //enable clock for GPIO ports A, B, C
+    //enable clock for GPIO ports A, B, C, D
     RCC->AHB2ENR |= (0x01 << RCC_AHB2ENR_GPIOAEN_Pos);
     RCC->AHB2ENR |= (0x01 << RCC_AHB2ENR_GPIOBEN_Pos);
     RCC->AHB2ENR |= (0x01 << RCC_AHB2ENR_GPIOCEN_Pos);
+    RCC->AHB2ENR |= (0x01 << RCC_AHB2ENR_GPIODEN_Pos);
 
     //enable clock for TIM3, TIM4, TIM8, TIM15
     RCC->APB1ENR1 |= (0x01 << RCC_APB1ENR1_TIM3EN_Pos);
@@ -57,8 +58,8 @@ void sysClockConfig(){
     RCC->APB2ENR |= (0x01 << RCC_APB2ENR_TIM8EN_Pos);
     RCC->APB2ENR |= (0x01 << RCC_APB2ENR_TIM15EN_Pos);
 
-    //enable clock for SPI1
-    RCC->APB2ENR |= (0x01 << RCC_APB2ENR_SPI1EN_Pos);
+    //enable clock for SPI3
+    RCC->APB1ENR1 |= (0x01 << RCC_APB1ENR1_SPI3EN_Pos);
 
 
 }

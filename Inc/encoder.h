@@ -2,7 +2,7 @@
  ******************************************************************************
  * @file           : encoder.h
  * @author         : Nicholas Caccamo
- * @brief          : Header for encoder configuration and driver
+ * @brief          : Header for encoder configuration and functions
  ******************************************************************************
  */
 #ifndef ENCODER_H

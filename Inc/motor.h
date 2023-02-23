@@ -38,6 +38,8 @@ typedef struct {
     int16_t motorDuty;
     int16_t motorDirection;
     int16_t motorSpeed;
+    int16_t motorSpeedBuffer[50];
+    int16_t motorSpeedAverage;
 }motorStatus_t;
 
 
@@ -46,9 +48,10 @@ void attemptSetMotorDirection(motordirection_t direction);
 void setMotorDuty(int16_t duty);
 void measureMotorSpeed();
 int16_t converttoRPM(int32_t encoderCountDifference);
+int16_t calcAverageRPM();
 int16_t queryMotorDirection();
 void updateMotorDirectionState(int16_t direction);
-int16_t queryMotorSpeed();
+int16_t queryAverageMotorSpeed();
 int16_t queryMotorDuty();
 
 #endif

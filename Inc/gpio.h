@@ -39,34 +39,36 @@
  * Pin Name Defines
  */
 //Rotary Encoder
-#define ENC_CLK_PORT				GPIOB
-#define ENC_CLK_PIN					GPIO_PIN_13
-#define ENC_DT_PORT					GPIOB
-#define ENC_DT_PIN					GPIO_PIN_14
-#define ENC_SW_PORT					GPIOB
-#define ENC_SW_PIN					GPIO_PIN_15
+#define ENC_CLK_PORT                GPIOB
+#define ENC_CLK_PIN                 GPIO_PIN_13
+#define ENC_DT_PORT                 GPIOB
+#define ENC_DT_PIN                  GPIO_PIN_14
+#define ENC_SW_PORT                 GPIOB
+#define ENC_SW_PIN                  GPIO_PIN_15
 
 //Motor
-#define MOT_ENC_A_PORT				GPIOA
-#define MOT_ENC_A_PIN				GPIO_PIN_11
-#define MOT_ENC_B_PORT				GPIOA
-#define MOT_ENC_B_PIN				GPIO_PIN_12
-#define MOT_DR_IN1_PORT				GPIOC
-#define MOT_DR_IN1_PIN				GPIO_PIN_7
-#define MOT_DR_IN2_PORT				GPIOA
-#define MOT_DR_IN2_PIN				GPIO_PIN_9
-#define MOT_DR_PWM_PORT				GPIOB
-#define MOT_DR_PWM_PIN				GPIO_PIN_6
+#define MOT_ENC_A_PORT              GPIOA
+#define MOT_ENC_A_PIN               GPIO_PIN_11
+#define MOT_ENC_B_PORT              GPIOA
+#define MOT_ENC_B_PIN               GPIO_PIN_12
+#define MOT_DR_IN1_PORT             GPIOC
+#define MOT_DR_IN1_PIN              GPIO_PIN_7
+#define MOT_DR_IN2_PORT             GPIOA
+#define MOT_DR_IN2_PIN              GPIO_PIN_9
+#define MOT_DR_PWM_PORT             GPIOB
+#define MOT_DR_PWM_PIN              GPIO_PIN_6
 
 //Display
-#define DIS_NSS_PORT				GPIOA
-#define DIS_NSS_PIN					GPIO_PIN_4
-#define DIS_SCK_PORT				GPIOA
-#define DIS_SCK_PIN					GPIO_PIN_5
-#define DIS_MOSI_PORT				GPIOA
-#define DIS_MOSI_PIN				GPIO_PIN_7
-#define DIS_DC_PORT					GPIOA
-#define DIS_DC_PIN					GPIO_PIN_6
+#define DIS_RES_PORT                GPIOA
+#define DIS_RES_PIN                 GPIO_PIN_15
+#define DIS_CS_PORT                 GPIOC
+#define DIS_CS_PIN                  GPIO_PIN_11
+#define DIS_SCK_PORT                GPIOC
+#define DIS_SCK_PIN                 GPIO_PIN_10
+#define DIS_MOSI_PORT               GPIOC
+#define DIS_MOSI_PIN                GPIO_PIN_12
+#define DIS_DC_PORT                 GPIOD
+#define DIS_DC_PIN                  GPIO_PIN_2
 
 //Temperature Sensor
 //#define TMP_PORT
@@ -74,8 +76,8 @@
 
 
 //Debugging LED
-#define DBG_LED_PORT			    GPIOB
-#define DBG_LED_PIN					GPIO_PIN_1
+#define DBG_LED_PORT                GPIOB
+#define DBG_LED_PIN                 GPIO_PIN_1
 
 /************************************************************************************************/
 

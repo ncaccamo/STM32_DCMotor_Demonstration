@@ -13,6 +13,8 @@
 #include <gpio.h>
 #include <encoder.h>
 #include <motor.h>
+#include <timer.h>
+#include <display.h>
 
 
 
@@ -107,10 +109,24 @@ void TIM3_IRQHandler(void){
  * Returns: none
  */
 void TIM1_BRK_TIM15_IRQHandler(void){
-    if ((TIM15->SR & (TIM_SR_UIF)) != 0) {				//check if the interrupt is caused by TIM15 update event
-        TIM15->SR = ~(TIM_SR_UIF);						//clear interrupt pending bit
-
-
+    //check if the interrupt is caused by TIM15 update event
+    if ((TIM15->SR & (TIM_SR_UIF)) != 0) {
+        //clear interrupt pending bit
+        TIM15->SR = ~(TIM_SR_UIF);
+        gDrawFlag = 1;
     }
+
+}
+/************************************************************************************************/
+
+/************************************************************************************************/
+/**
+ * IRQ Handler and ISR for SysTick
+ * Parameters: none
+ * Returns: none
+ */
+void SysTick_Handler(void)
+{
+    gMsTicks++;
 }
 /************************************************************************************************/

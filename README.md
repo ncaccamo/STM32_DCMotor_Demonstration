@@ -23,10 +23,11 @@ Hardware connections:
 
 | Nucleo Board Pin Label | Signal    		| Hardware Interface |
 |------------------------|------------------|--------------------|
-| PA4                    | SPI1_NSS  		| Display CS         |
-| PA5                    | SPI1_SCK  		| Display D0         |
-| PA6                    | Output    		| Display DC         |
-| PA7                    | SPI1_MOSI 		| Display D1         |
+| PC10                   | SPI3_SCK 	 	| Display D0         |
+| PC11                   | Output  		    | Display CS         |
+| PC12                   | SPI3_MOSI  		| Display D1         |
+| PD2                    | Output    		| Display DC         |
+| PA15                   | Output        	| Display RES        |
 | PA11                   | Timer Input  	| Motor Encoder A    |
 | PA12                   | Timer Input  	| Motor Encoder B    |
 | PC7                    | Output    		| Motor Driver In1   |
@@ -38,7 +39,7 @@ Hardware connections:
 | PA0                    | ADC Input		| Temp Sensor Output |
 
 
-Issues encountered, learnings:
+Issues encountered, learnings, notes:
 - GPIO clock has to be enabled before the configuration registers can be written.
 - Clearing GPIOA MODER register disabled the JTAG. Learned that JTAG is using some pins on GPIO Port A so those pin configurations were left at reset value.
 - Writing clock registers required that flash latency was set to 4 wait states according to ST example code and the manual.
@@ -48,6 +49,8 @@ Issues encountered, learnings:
 - For reference, to calculate the update frequency of a timer: TIM_CLK / (PSC + 1) / (ARR + 1) / (RSR + 1), the terms being prescaler (PSC), auto-reload register (ARR), and repetition counter (RCR). The result is in hertz and must be converted to seconds (1/hz).
 - For reference, the frequency of PWM is calculated by TIM_CLK / (PSC + 1) / (ARR + 1), because it is based on a timer. The result is in hertz. Duty cycle is calculated by CCRx/ARRx, where CCRx is the reload value of the capture/compare register. 
 - The initial timer interrupt frequency of 200ms (5hz) was much too slow, and there were many errors in detecting the encoder movement, such as missed pulses and failure to switch the direction flag. Polling at 30hz is working better.
+- I found the SPI hardware NSS (chip select) automatic control to be confusing and decided to use a GPIO as CS and manually change its state for data transfer.
+- The screen drawing function seems to take too long to be safely put in an ISR directly - infinite loop occurs. Setting a flag in the ISR to update the screen in the main loop seems to be stable.
 
 
 

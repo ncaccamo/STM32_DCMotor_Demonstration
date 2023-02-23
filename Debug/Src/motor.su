@@ -1,8 +1,9 @@
-../Src/motor.c:27:6:attemptSetMotorDirection	16	static
-../Src/motor.c:57:6:setMotorDuty	16	static
-../Src/motor.c:73:6:measureMotorSpeed	8	static
-../Src/motor.c:117:9:converttoRPM	24	static
-../Src/motor.c:130:9:queryMotorDirection	4	static
-../Src/motor.c:141:6:updateMotorDirectionState	16	static
-../Src/motor.c:154:9:queryMotorSpeed	4	static
-../Src/motor.c:165:9:queryMotorDuty	4	static
+../Src/motor.c:28:6:attemptSetMotorDirection	16	static
+../Src/motor.c:58:6:setMotorDuty	16	static
+../Src/motor.c:74:6:measureMotorSpeed	8	static
+../Src/motor.c:122:9:converttoRPM	24	static
+../Src/motor.c:137:9:calcAverageRPM	16	static
+../Src/motor.c:163:9:queryMotorDirection	4	static
+../Src/motor.c:174:6:updateMotorDirectionState	16	static
+../Src/motor.c:187:9:queryAverageMotorSpeed	4	static
+../Src/motor.c:198:9:queryMotorDuty	4	static
