@@ -11,7 +11,7 @@
 
 
 //function prototypes
-void adcInit(void);
+void ADC1Init(void);
 
 
 

@@ -130,9 +130,9 @@ void drawDisplay(){
         sprintf((char *)directionString, "%s", "CCW");
     }
 
-    //int16_t temperature = queryMotorTemperature();
-    //int8_t temperatureString[4];
-    //sprintf((char *)temperatureString, "%d", temperature);
+    int16_t temperature = queryTemperature();
+    int8_t temperatureString[4];
+    sprintf((char *)temperatureString, "%d", temperature);
 
     u8g2_ClearBuffer(&u8g2);
     u8g2_DrawFrame(&u8g2, 0, 0, 128, 64);
@@ -145,7 +145,7 @@ void drawDisplay(){
     u8g2_DrawStr(&u8g2, 3, 42, "Direction: ");
     u8g2_DrawStr(&u8g2, 79, 42, (char *)directionString);
     u8g2_DrawStr(&u8g2, 3, 56, "Temperature: ");
-    //u8g2_DrawStr(&u8g2, 87, 56, (char *)temperatureString);
+    u8g2_DrawStr(&u8g2, 87, 56, (char *)temperatureString);
     u8g2_DrawGlyph(&u8g2, 108, 56, 176);
     u8g2_DrawStr(&u8g2, 115, 56, "C");
     u8g2_SendBuffer(&u8g2);

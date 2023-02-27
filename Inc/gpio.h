@@ -71,13 +71,13 @@
 #define DIS_DC_PIN                  GPIO_PIN_2
 
 //Temperature Sensor
-//#define TMP_PORT
-//#define TMP_PIN
+#define TMP_PORT                    GPIOA
+#define TMP_PIN                     GPIO_PIN_1
 
 
-//Debugging LED
-#define DBG_LED_PORT                GPIOB
-#define DBG_LED_PIN                 GPIO_PIN_1
+//Debugging LED (onboard)
+#define DBG_LED_PORT                GPIOA
+#define DBG_LED_PIN                 GPIO_PIN_5
 
 /************************************************************************************************/
 

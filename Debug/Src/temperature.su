@@ -1,0 +1,2 @@
+../Src/temperature.c:23:6:measureTemperature	24	static
+../Src/temperature.c:49:8:queryTemperature	4	static

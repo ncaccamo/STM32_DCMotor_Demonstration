@@ -14,7 +14,6 @@
  * Parameters: none
  * Returns: none
  */
-
 void gpioInit(){
     //clock for GPIO enabled in clockconfig.c
 
@@ -35,7 +34,6 @@ void gpioInit(){
     GPIOB->PUPDR |= (0x01 << GPIO_PUPDR_PUPD13_Pos);  //PU
     GPIOB->PUPDR |= (0x01 << GPIO_PUPDR_PUPD14_Pos);  //PU
     GPIOB->PUPDR |= (0x01 << GPIO_PUPDR_PUPD15_Pos);  //PU
-
 
 
     //set outputs
@@ -59,28 +57,27 @@ void gpioInit(){
     GPIOA->MODER |= (0x02 << GPIO_MODER_MODE12_Pos);
 
     //set PA11, P12 alternate function to AF10 (TIM4)
-    GPIOA->AFR[1] |= (0x0A << GPIO_AFRH_AFSEL11_Pos);		//TIM4_CH1
-    GPIOA->AFR[1] |= (0x0A << GPIO_AFRH_AFSEL12_Pos);		//TIM4_CH2
+    GPIOA->AFR[1] |= (0x0A << GPIO_AFRH_AFSEL11_Pos);       //TIM4_CH1
+    GPIOA->AFR[1] |= (0x0A << GPIO_AFRH_AFSEL12_Pos);       //TIM4_CH2
 
     //set PB6 to alternate function mode AF5 (TIM8)
     GPIOB->MODER |= (0x02 << GPIO_MODER_MODE6_Pos);
-    GPIOB->AFR[0] |= (0x05 << GPIO_AFRL_AFSEL6_Pos);		//TIM8_CH1
+    GPIOB->AFR[0] |= (0x05 << GPIO_AFRL_AFSEL6_Pos);        //TIM8_CH1
 
     //set PC10, PC12 alternate function mode (SPI3)
     GPIOC->MODER |= (0x02 << GPIO_MODER_MODE10_Pos);
     GPIOC->MODER |= (0x02 << GPIO_MODER_MODE12_Pos);
 
     //set PC10, PC12 alternate function to AF6 (SPI3)
-    GPIOC->AFR[1] |= (0x06 << GPIO_AFRH_AFSEL10_Pos);		//SPI3_SCK
-    GPIOC->AFR[1] |= (0x06 << GPIO_AFRH_AFSEL12_Pos);		//SPI3_MOSI
+    GPIOC->AFR[1] |= (0x06 << GPIO_AFRH_AFSEL10_Pos);       //SPI3_SCK
+    GPIOC->AFR[1] |= (0x06 << GPIO_AFRH_AFSEL12_Pos);       //SPI3_MOSI
 
-    //set PA0? to ADC input
+    //set PA1 to analog input
+    GPIOA->MODER |= (0x03 << GPIO_MODER_MODE1_Pos);
 
-
-
-    //set PB1 as output for LED debugging
-    GPIOB->MODER |= (0x01 << GPIO_MODER_MODE1_Pos);
-    GPIOB->OTYPER &= ~(0x01 << GPIO_MODER_MODE1_Pos);
+    //set PA5 as output for onboard debug LED
+    GPIOA->MODER |= (0x01 << GPIO_MODER_MODE5_Pos);
+    GPIOA->OTYPER &= ~(0x01 << GPIO_MODER_MODE5_Pos);
 }
 /************************************************************************************************/
 
@@ -95,7 +92,6 @@ void gpioInit(){
  * 			   GPIO_PIN_x is the GPIO pin number, where x can be 0...15. This is the pin's position in the register.
  * Returns: PIN_LOW or PIN_HIGH for state of pin.
  */
-
 int16_t readPin(GPIO_TypeDef *GPIOx, uint16_t GPIO_PIN_x){
     if ((GPIOx->IDR & GPIO_PIN_x) != PIN_LOW) {
         return PIN_HIGH;
@@ -116,7 +112,6 @@ int16_t readPin(GPIO_TypeDef *GPIOx, uint16_t GPIO_PIN_x){
  *             pinState is the desired pin setting and can be PIN_HIGH or PIN_LOW.
  * Returns: none
  */
-
 void setPin(GPIO_TypeDef *GPIOx, uint16_t GPIO_PIN_x, pinstate_t pinState){
     if (pinState == PIN_LOW){
         //set pin LOW
@@ -137,7 +132,6 @@ void setPin(GPIO_TypeDef *GPIOx, uint16_t GPIO_PIN_x, pinstate_t pinState){
  *             pinState is the desired pin setting and can be PIN_HIGH or PIN_LOW.
  * Returns: none
  */
-
 void togglePin(GPIO_TypeDef *GPIOx, uint16_t GPIO_PIN_x){
 
     if ((GPIOx->ODR & GPIO_PIN_x) != PIN_LOW) {

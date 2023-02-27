@@ -43,6 +43,9 @@ void sysClockConfig(){
     RCC->CFGR |= (0x03 << RCC_CFGR_SW_Pos);
     while (!(RCC->CFGR & (0x03 << RCC_CFGR_SWS_Pos)));
 
+    //enable clock for Power Control
+    RCC->APB1ENR1 |= (0x01 << RCC_APB1ENR1_PWREN_Pos);
+
     //enable clock for System Configuration controller
     RCC->APB2ENR |= (0x01 << RCC_APB2SMENR_SYSCFGSMEN_Pos);
 
@@ -60,6 +63,11 @@ void sysClockConfig(){
 
     //enable clock for SPI3
     RCC->APB1ENR1 |= (0x01 << RCC_APB1ENR1_SPI3EN_Pos);
+
+    //enable clock for ADC1
+    RCC->AHB2ENR |= (0x01 << RCC_AHB2ENR_ADC12EN_Pos);
+    //system clock selected as ADC1/2 clock
+    RCC->CCIPR |= (0x02 << RCC_CCIPR_ADC12SEL_Pos);
 
 
 }

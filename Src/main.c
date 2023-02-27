@@ -27,40 +27,45 @@
 #include <motor.h>
 #include <spi.h>
 #include <display.h>
+#include <adc.h>
+#include <temperature.h>
 
-int8_t gDrawFlag = 0;
-
-//#if !defined(__SOFT_FP__) && defined(__ARM_FP)
-//  #warning "FPU is not initialized, but the project is compiling for an FPU. Please initialize the FPU before use."
-//#endif
+volatile int8_t gDrawFlag = 0;
+volatile int8_t gTemperatureFlag = 0;
 
 int main(void)
 {
     sysClockConfig();
+    SysTick_Config(SystemCoreClock / 1000);
     gpioInit();
     interruptInit();
     TIM3Init();
     TIM4Init();
     TIM8Init();
     TIM15Init();
+    ADC1Init();
     SPI3Init();
-    SysTick_Config(SystemCoreClock / 1000);
     attemptSetMotorDirection(MOTOR_FORWARD);
     setMotorDuty(0);
     displayInit();
+    measureTemperature();
     printf("Initialization done.\n");
 
 
 
     while(1){
+        //draw flag set by TIM15 timer interrupt
         if (gDrawFlag == 1){
             gDrawFlag = 0;
             drawDisplay();
         }
+        //temperature flag set by TIM15 timer interrupt
+        if (gTemperatureFlag == 1){
+            gTemperatureFlag = 0;
+            measureTemperature();
+        }
     }
 }
-
-
 
 
 

@@ -103,7 +103,7 @@ void TIM8Init(){
     //main output enabled
     TIM8->BDTR |= (0x01 << TIM_BDTR_MOE_Pos);
     //auto-reload, corresponds with PWM frequency
-    TIM8->ARR = 50-1;
+    TIM8->ARR = 100-1;
     //prescalar of 170, so the input clock is 10Mhz
     TIM8->PSC = 170-1;
     //initialize shadow registers before counter starts
@@ -112,8 +112,8 @@ void TIM8Init(){
     TIM8->CR1 |= (0x01 << TIM_CR1_CEN_Pos);
 
     //PWM Frequency = TIM_CLK / (PSC + 1) / (ARR + 1)
-    //PWM Frequency = 1700000000 / 170 / 50
-    //PWM Frequency = 20Khz
+    //PWM Frequency = 1700000000 / 170 / 100
+    //PWM Frequency = 10Khz
 
 }
 /************************************************************************************************/

@@ -17,7 +17,9 @@
  * Returns: none
  */
 void SPI3Init(){
-    //SPI3 clock enabled in clockconfig.c and GPIO configured in gpio.c
+    //SPI3 clock enabled in clockconfig.c
+    //GPIO configured in gpio.c
+
     //1-line bidrectional data mode
     //SPI3->CR1 |= (SPI_CR1_BIDIMODE);
     //transmit-only mode
@@ -39,7 +41,7 @@ void SPI3Init(){
     //SPI3->CR1 |= (SPI_CR1_CPHA);
 
     //Data size 8-bit
-    //SPI3->CR2 |= (0x07 << SPI_CR2_DS_Pos);
+    SPI3->CR2 |= (0x07 << SPI_CR2_DS_Pos);
     //SS output enabled in master mode
     //SPI3->CR2 |= (SPI_CR2_SSOE);
 
