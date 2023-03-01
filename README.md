@@ -1,5 +1,10 @@
 # STM32_DCMotor_Demonstration
 
+![alt text](https://github.com/ncaccamo/STM32_DCMotor_Demonstration/tree/main/pictures/Complete_setup.jpg?raw=true)
+
+![alt text](https://github.com/ncaccamo/STM32_DCMotor_Demonstration/tree/main/pictures/Display_closeup.jpg?raw=true)
+
+
 This project is intended to practice and demonstrate embedded software skills on a modern ARM microcontroller.
 
 Main objectives:
