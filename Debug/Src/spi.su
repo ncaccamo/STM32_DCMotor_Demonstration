@@ -1,4 +1,4 @@
 ../Src/spi.c:19:6:SPI3Init	8	static
-../Src/spi.c:60:6:transferSPIByte	16	static
-../Src/spi.c:77:6:startTransferSPI	8	static
-../Src/spi.c:92:6:endTransferSPI	8	static
+../Src/spi.c:50:6:transferSPIByte	16	static
+../Src/spi.c:67:6:startTransferSPI	8	static
+../Src/spi.c:82:6:endTransferSPI	8	static

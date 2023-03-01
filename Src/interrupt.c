@@ -111,8 +111,14 @@ void TIM1_BRK_TIM15_IRQHandler(void){
     if ((TIM15->SR & (TIM_SR_UIF)) != 0) {
         //clear interrupt pending bit
         TIM15->SR = ~(TIM_SR_UIF);
-        //display draw flag set every interrupt
-        gDrawFlag = 1;
+
+        //draw display flag set every interrupt
+        static int8_t drawCount = 0;
+        drawCount++;
+        if (drawCount >= 1){
+            drawCount = 0;
+            gDrawFlag = 1;
+        }
         //temperature measurement flag set every 20 interrupts
         static int8_t temperatureCount = 0;
         temperatureCount++;

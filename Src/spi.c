@@ -20,30 +20,20 @@ void SPI3Init(){
     //SPI3 clock enabled in clockconfig.c
     //GPIO configured in gpio.c
 
-    //1-line bidrectional data mode
-    //SPI3->CR1 |= (SPI_CR1_BIDIMODE);
-    //transmit-only mode
-    //SPI3->CR1 |= (SPI_CR1_BIDIOE);
     //Software slave management
     SPI3->CR1 |= (SPI_CR1_SSM);
     //Internal slave select bit
     SPI3->CR1 |= (SPI_CR1_SSI);
-    //baud rate control, clock divider 128
-    SPI3->CR1 |= (SPI_CR1_BR_2 | SPI_CR1_BR_1);
+    //baud rate control, clock divider 64
+    SPI3->CR1 |= (SPI_CR1_BR_2 | SPI_CR1_BR_0);
     //master configuration
     SPI3->CR1 |= (SPI_CR1_MSTR);
     //clock polarity 0 when idle
     SPI3->CR1 &= ~(SPI_CR1_CPOL);
     //clock phase
     SPI3->CR1 &= ~(SPI_CR1_CPHA);
-
-    //SPI3->CR1 |= (SPI_CR1_CPOL);
-    //SPI3->CR1 |= (SPI_CR1_CPHA);
-
     //Data size 8-bit
     SPI3->CR2 |= (0x07 << SPI_CR2_DS_Pos);
-    //SS output enabled in master mode
-    //SPI3->CR2 |= (SPI_CR2_SSOE);
 
     //CS initialized high
     setPin(DIS_CS_PORT, DIS_CS_PIN, PIN_HIGH);

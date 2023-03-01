@@ -31,6 +31,8 @@ void displayInit(){
     u8g2_Setup_ssd1306_128x64_noname_f(&u8g2, U8G2_R0, u8x8_byte_4wire_hw_spi, u8x8_stm32_gpio_and_delay);  // init u8g2 structure
     u8g2_InitDisplay(&u8g2); // send init sequence to the display, display is in sleep mode after this,
     u8g2_SetPowerSave(&u8g2, 0); // wake up display
+    delayMs(10);
+    u8g2_ClearBuffer(&u8g2);
 }
 /************************************************************************************************/
 
@@ -49,7 +51,7 @@ uint8_t u8x8_stm32_gpio_and_delay(u8x8_t *u8x8,
   case U8X8_MSG_GPIO_AND_DELAY_INIT:
     delayMs(1);
     break;
-  case U8X8_MSG_DELAY_10MICRO:      // delay arg_int * 10 micro seconds
+  case U8X8_MSG_DELAY_10MICRO:
     delayMs(1);
     break;
   case U8X8_MSG_DELAY_MILLI:
